@@ -9,6 +9,7 @@ import {
   TrendingUp,
   Code,
 } from "lucide-react";
+import Link from "next/link";
 import ProcessSection from "@/components/ProcessSection";
 import TestimonialSlider from "@/components/TestimonialSlider";
 import ContactModalCTA from "@/components/ContactModalCTA";
@@ -101,7 +102,11 @@ export default function Home() {
     <div className="bg-brand w-full overflow-hidden">
       {/* HERO SECTION */}
       <section className="relative w-full overflow-hidden bg-brand">
-        <div className="relative w-full overflow-hidden">
+        <Link
+          href="/services"
+          aria-label="Explore TechBuds services"
+          className="relative block w-full overflow-hidden"
+        >
           <picture>
             <source
               media="(min-width: 768px)"
@@ -113,7 +118,7 @@ export default function Home() {
               className="w-full h-auto block"
             />
           </picture>
-        </div>
+        </Link>
       </section>
 
       {/* TRUST BAR SECTION */}
@@ -198,7 +203,7 @@ export default function Home() {
               {/* stat row */}
               <div className="mt-8 grid grid-cols-3 gap-4 border-t border-custom pt-8">
                 {[
-                  { value: "50+", label: "Projects Delivered" },
+                  { value: "10+", label: "Industry Verticals" },
                   { value: "5+", label: "Years Experience" },
                   { value: "98%", label: "Client Satisfaction" },
                 ].map((stat) => (

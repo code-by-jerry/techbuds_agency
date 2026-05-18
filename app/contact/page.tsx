@@ -13,6 +13,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { submitStaticForm } from "@/lib/staticForms";
+import { whatsappUrl } from "@/lib/contact";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -144,7 +145,7 @@ export default function Contact() {
                     icon: MessageSquare,
                     label: "WhatsApp",
                     value: "+91 70929 36243",
-                    href: "https://wa.me/917092936243",
+                    href: whatsappUrl,
                   },
                   {
                     icon: MapPin,
