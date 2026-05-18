@@ -132,7 +132,7 @@ export default function ContactModalCTA() {
             </button>
 
             <div className="grid grid-cols-1 md:grid-cols-[1.15fr_1fr] max-h-[calc(100vh-4rem)]">
-              <div className="relative overflow-hidden bg-[#0f172a] md:min-h-full">
+              <div className="relative hidden overflow-hidden bg-[#0f172a] md:block md:min-h-full">
                 <img
                   src="https://ik.imagekit.io/codebyjerry/techbuds/contact_1.png"
                   alt="Contact preview"
@@ -141,7 +141,7 @@ export default function ContactModalCTA() {
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#050816]/95 via-transparent to-transparent" />
               </div>
 
-              <div className="flex items-start p-6 sm:p-8 md:p-10 overflow-y-auto max-h-[calc(100vh-4rem)]">
+              <div className="scrollbar-hidden flex items-start overflow-y-auto max-h-[calc(100vh-4rem)] p-5 sm:p-8 md:p-10">
                 <div className="w-full">
                   <div className="mb-6 space-y-3">
                     <p className="text-xs font-semibold uppercase tracking-[0.28em] text-red-400">
