@@ -189,9 +189,9 @@ export default function Home() {
               <div className="mt-2 h-1 w-20 rounded-full bg-accent-secondary" />
 
               <p className="mt-6 text-secondary text-base md:text-lg leading-relaxed">
-                TechBuds is a modern digital solutions company focused on
-                building impactful brands, scalable platforms, and
-                high-performance digital experiences.
+                TechBuds is a modern digital solutions team focused on building
+                impactful brands, scalable platforms, and high-performance
+                digital experiences.
               </p>
 
               <p className="mt-4 text-secondary text-base md:text-lg leading-relaxed">
