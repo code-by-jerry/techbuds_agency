@@ -1,26 +1,274 @@
+@import url("https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap");
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* =========================
+🎨 THEME (CHARCOAL + CORAL)
+========================= */
+@theme {
+  --color-background: #020617;
+  --color-surface: #0f172a;
+  --color-surface-light: #1e293b;
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #94a3b8;
+  --color-accent-primary: #1f2937;
+  --color-accent-secondary: #ff5a5f;
+  --color-border: #334155;
+  --font-play: "Play", sans-serif;
+  --font-inter: var(--font-inter), sans-serif;
+  --font-poppins: var(--font-poppins), sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* =========================
+🧱 UTILITIES
+========================= */
+@utility bg-brand {
+  background-color: var(--color-background);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@utility bg-surface {
+  background-color: var(--color-surface);
+}
+
+@utility bg-surface-light {
+  background-color: var(--color-surface-light);
+}
+
+@utility text-primary {
+  color: var(--color-text-primary);
+}
+
+@utility text-secondary {
+  color: var(--color-text-secondary);
+}
+
+@utility border-custom {
+  border-color: var(--color-border);
+}
+
+@utility icon-primary {
+  color: var(--color-accent-secondary);
+}
+
+@utility icon-muted {
+  color: var(--color-text-secondary);
+}
+
+/* =========================
+🔘 BUTTONS
+========================= */
+@utility btn-primary {
+  background-color: var(--color-accent-secondary);
+  color: white;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #e04848;
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(255, 90, 95, 0.35);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility btn-secondary {
+  background-color: var(--color-accent-primary);
+  color: white;
+  padding: 12px 22px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #374151;
+  }
+}
+
+/* =========================
+🧩 BASE STYLES
+========================= */
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: var(--font-play);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-poppins);
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  a {
+    color: var(--color-accent-secondary);
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: #ff7a7d;
+  }
+
+  .play-regular {
+    font-family: "Play", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .play-bold {
+    font-family: "Play", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+}
+
+/* =========================
+🔄 LOGO MARQUEE (Trust Bar)
+========================= */
+.logo-marquee {
+  display: flex;
+  gap: 1.5rem;
+  animation: marquee 18s linear infinite;
+  animation-play-state: running;
+}
+
+.logo-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* =========================
+📡 TECH MARQUEE
+========================= */
+.tech-marquee-wrapper {
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 3rem,
+    black calc(100% - 3rem),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 3rem,
+    black calc(100% - 3rem),
+    transparent 100%
+  );
+}
+
+.tech-marquee-track {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  animation: techMarquee 40s linear infinite;
+}
+
+.tech-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes techMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.tech-logo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100px;
+  padding: 1rem 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(4px);
+  transition: all 0.4s ease;
+  flex-shrink: 0;
+}
+
+.tech-logo-card:hover {
+  border-color: rgba(248, 113, 113, 0.3);
+  background: rgba(248, 113, 113, 0.06);
+  box-shadow: 0 0 24px rgba(248, 113, 113, 0.12);
+  transform: translateY(-3px);
+}
+
+/* =========================
+💬 TESTIMONIAL CARD
+========================= */
+.testimonial-card {
+  flex-shrink: 0;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(4px);
+  transition: all 0.4s ease;
+}
+
+.testimonial-card:hover {
+  border-color: rgba(248, 113, 113, 0.3);
+  box-shadow: 0 0 24px rgba(248, 113, 113, 0.1);
+  transform: translateY(-3px);
+}
+
+/* =========================
+✨ CARD COMPONENT
+========================= */
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  background-color: var(--color-surface-light);
+  border-color: #475569;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* =========================
+🧊 NAVBAR (GLASS EFFECT)
+========================= */
+.navbar-glass {
+  background: rgba(2, 6, 23, 0.7);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* =========================
+🔥 SCROLLBAR
+========================= */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 10px;
 }
