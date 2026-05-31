@@ -28,13 +28,6 @@ export const metadata: Metadata = {
 
 const portfolioItems = [
   {
-    name: "Jippy Mart",
-    category: "Food Delivery Platform",
-    description:
-      "A modern food delivery platform focused on fast ordering, restaurant management, real-time delivery workflows, and seamless customer experiences.",
-    logo: "https://ik.imagekit.io/codebyjerry/contibutions%20-%20logo/jippymart.webp?updatedAt=1777100737251",
-  },
-  {
     name: "Aaran Info",
     category: "Accounts Consultancy & Billing Software",
     description:

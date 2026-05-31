@@ -56,10 +56,10 @@ export default function Footer() {
               techbuds57@gmail.com
             </a>
             <a
-              href="tel:+919885394334"
+              href="tel:+919491312257"
               className="block transition-colors hover:text-accent-secondary"
             >
-              +91 98853 94334
+              +91 94913 12257
             </a>
             <a
               href={whatsappUrl}

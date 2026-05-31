@@ -207,7 +207,7 @@ export default function ContactModalCTA() {
                             name="phone"
                             value={formData.phone}
                             onChange={handleChange}
-                            placeholder="+91 98853 94334"
+                            placeholder="+91 94913 12257"
                             className="w-full bg-transparent text-sm text-white outline-none placeholder:text-secondary/40"
                           />
                         </div>

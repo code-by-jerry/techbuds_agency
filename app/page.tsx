@@ -57,10 +57,6 @@ export default function Home() {
       alt: "Destro Solutions",
     },
     {
-      src: "https://ik.imagekit.io/codebyjerry/contibutions%20-%20logo/jippymart.webp?updatedAt=1777100737251",
-      alt: "JippyMart",
-    },
-    {
       src: "https://ik.imagekit.io/codebyjerry/contibutions%20-%20logo/logo.svg",
       alt: "Client Logo",
     },
@@ -85,10 +81,6 @@ export default function Home() {
       alt: "Destro Solutions",
     },
     {
-      src: "https://ik.imagekit.io/codebyjerry/contibutions%20-%20logo/jippymart.webp?updatedAt=1777100737251",
-      alt: "JippyMart",
-    },
-    {
       src: "https://ik.imagekit.io/codebyjerry/contibutions%20-%20logo/logo.svg",
       alt: "Client Logo",
     },
@@ -101,24 +93,59 @@ export default function Home() {
   return (
     <div className="bg-brand w-full overflow-hidden">
       {/* HERO SECTION */}
-      <section className="relative w-full overflow-hidden bg-brand">
-        <Link
-          href="/services"
-          aria-label="Explore TechBuds services"
-          className="relative block w-full overflow-hidden"
+      <section className="relative w-full overflow-hidden bg-brand h-screen">
+        <video
+          src="/video/Fluid_motion_graphic_abstract_waves_202605310524.mp4"
+          className="absolute inset-0 h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
         >
-          <picture>
-            <source
-              media="(min-width: 768px)"
-              srcSet="https://ik.imagekit.io/codebyjerry/techbuds/Hero%20web%20image.png"
-            />
-            <img
-              src="https://ik.imagekit.io/codebyjerry/techbuds/Hero%20mobile%20image.png?updatedAt=1779037241193"
-              alt="Techbuds hero"
-              className="w-full h-auto block"
-            />
-          </picture>
-        </Link>
+          Your browser does not support the video tag.
+        </video>
+
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 flex items-center justify-center px-6 py-16 md:py-24">
+          <div className="max-w-4xl text-center">
+            <p className="mb-4 text-sm uppercase tracking-[0.35em] text-accent-secondary font-semibold">
+              Fluid tech motion
+            </p>
+            <h1 className="text-4xl font-bold leading-tight text-white md:text-6xl">
+              Building digital brands, products, and platforms that grow
+              revenue.
+            </h1>
+            <div className="relative mt-8 h-20 overflow-hidden">
+              {[
+                "Custom websites",
+                "Mobile apps",
+                "Ecommerce platforms",
+                "Branding & digital strategy",
+              ].map((line, index) => (
+                <p
+                  key={line}
+                  className="hero-phrase absolute inset-x-0 text-lg font-semibold text-white/90 md:text-xl"
+                  style={{ animationDelay: `${index * 3}s` }}
+                >
+                  {line}
+                </p>
+              ))}
+            </div>
+            <p className="mt-6 text-base text-secondary max-w-2xl mx-auto md:text-lg">
+              Premium abstract visuals, fluid motion, and crisp content
+              transitions for a bold digital studio first impression.
+            </p>
+            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Link href="/contact" className="btn-primary">
+                Start your project
+              </Link>
+              <Link href="/portfolio" className="btn-secondary">
+                View portfolio
+              </Link>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* TRUST BAR SECTION */}
@@ -498,12 +525,6 @@ export default function Home() {
                 title: "Pixora — SaaS Platform",
                 desc: "Full-stack dashboard with real-time analytics and team collaboration features.",
                 tags: ["Next.js", "Node.js", "PostgreSQL", "Redis"],
-              },
-              {
-                src: "https://ik.imagekit.io/codebyjerry/techbuds/mobile_app.png",
-                title: "JippyMart — Mobile App",
-                desc: "Cross-platform shopping app with AI-powered recommendations and live tracking.",
-                tags: ["React Native", "Firebase", "Stripe"],
               },
               {
                 src: "https://ik.imagekit.io/codebyjerry/techbuds/business_paltform_new.png",

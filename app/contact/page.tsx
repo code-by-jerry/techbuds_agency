@@ -20,8 +20,8 @@ const teamMembers = [
   {
     role: "Senior Executive",
     name: "Venky",
-    phone: "+91 98853 94334",
-    href: "tel:+919885394334",
+    phone: "+91 94913 12257",
+    href: "tel:+919491312257",
     image: "https://ik.imagekit.io/codebyjerry/techbuds/Executive.png",
   },
   {
@@ -43,7 +43,7 @@ const teamMembers = [
 const contactFaq = [
   {
     q: "How can I contact TechBuds?",
-    a: "You can contact us through the form on this page, email us at techbuds57@gmail.com, call +91 98853 94334, or message us on WhatsApp at +91 70929 36243.",
+    a: "You can contact us through the form on this page, email us at techbuds57@gmail.com, call +91 94913 12257, or message us on WhatsApp at +91 70929 36243.",
   },
   {
     q: "How quickly do you respond to project inquiries?",
@@ -75,9 +75,9 @@ export default function Contact() {
     subject: "",
     message: "",
   });
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">(
-    "idle",
-  );
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -190,8 +190,8 @@ export default function Contact() {
                   {
                     icon: Phone,
                     label: "Phone",
-                    value: "+91 98853 94334",
-                    href: "tel:+919885394334",
+                    value: "+91 94913 12257",
+                    href: "tel:+919491312257",
                   },
                   {
                     icon: MessageSquare,
