@@ -1,7 +1,9 @@
 import ContactModalCTA from "@/components/ContactModalCTA";
 import FAQSection from "@/components/FAQSection";
+import PageHeroBanner from "@/components/PageHeroBanner";
 import PortfolioShowcase from "@/components/PortfolioShowcase";
 import TestimonialSlider from "@/components/TestimonialSlider";
+import { PAGE_BANNERS } from "@/lib/page-banners";
 import { PORTFOLIO_PROJECTS } from "@/lib/portfolio";
 import type { Metadata } from "next";
 
@@ -19,7 +21,7 @@ export const metadata: Metadata = {
     url: "/portfolio",
     images: [
       {
-        url: "https://ik.imagekit.io/codebyjerry/techbuds/portfolio_web.png",
+        url: PAGE_BANNERS.portfolio.image,
         width: 1200,
         height: 630,
         alt: "TechBuds portfolio",
@@ -54,40 +56,12 @@ const portfolioFaq = [
 export default function Portfolio() {
   return (
     <div className="bg-brand">
-      <section className="w-full overflow-hidden border-b border-custom">
-        <picture>
-          <source
-            media="(min-width: 768px)"
-            srcSet="https://ik.imagekit.io/codebyjerry/techbuds/portfolio_web.png"
-          />
-          <img
-            src="https://ik.imagekit.io/codebyjerry/techbuds/portfolio_mobile.png"
-            alt="TechBuds portfolio hero banner"
-            className="block h-auto w-full"
-            fetchPriority="high"
-          />
-        </picture>
-      </section>
+      <PageHeroBanner {...PAGE_BANNERS.portfolio} />
 
       <section className="relative overflow-hidden border-b border-custom bg-[#081124]">
         <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[600px] -translate-x-1/2 rounded-full bg-accent-secondary/[0.06] blur-3xl" />
 
         <div className="relative mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-20">
-          <div className="mb-10 max-w-3xl">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-accent-secondary">
-              Portfolio
-            </p>
-            <h1 className="text-3xl font-bold text-primary md:text-5xl">
-              Work We Have <span className="text-accent-secondary">Built</span>
-            </h1>
-            <div className="mt-3 h-0.5 w-16 rounded-full bg-accent-secondary" />
-            <p className="mt-5 text-base leading-relaxed text-secondary/85 md:text-lg">
-              Real platforms and products across q-commerce, healthcare
-              ecommerce, AI-powered mobile apps, and software-defined vehicle
-              technology — with full screenshot galleries for each project.
-            </p>
-          </div>
-
           <nav
             aria-label="Portfolio projects"
             className="mb-12 flex flex-wrap gap-2"

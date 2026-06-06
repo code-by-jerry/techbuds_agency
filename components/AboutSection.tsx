@@ -1,6 +1,17 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { ABOUT_IMAGE, ABOUT_STATS } from "@/lib/about";
+import { ArrowRight, Lightbulb, Target, Users } from "lucide-react";
+import {
+  ABOUT_HOME_CONTENT,
+  ABOUT_PAGE_CONTENT,
+  type AboutSectionContent,
+} from "@/lib/about";
+import { ABOUT_EXPERTISE_BADGES } from "@/lib/trust-badges";
+
+const expertiseIcons = {
+  expert: Users,
+  insights: Lightbulb,
+  strategy: Target,
+} as const;
 
 type AboutTheme = "light" | "dark";
 
@@ -46,16 +57,41 @@ const themeStyles: Record<
 
 type AboutSectionProps = {
   theme?: AboutTheme;
+  variant?: "home" | "page";
   id?: string;
   showLink?: boolean;
 };
 
+const ABOUT_VARIANTS: Record<"home" | "page", AboutSectionContent> = {
+  home: ABOUT_HOME_CONTENT,
+  page: ABOUT_PAGE_CONTENT,
+};
+
+const variantOverrides: Partial<
+  Record<"home" | "page", Partial<(typeof themeStyles)["light"]>>
+> = {
+  page: {
+    section: "border-y border-[#e2e8f0] bg-[#FEFEFE]",
+    image: "",
+  },
+};
+
 export default function AboutSection({
   theme = "light",
+  variant = "home",
   id,
   showLink = false,
 }: AboutSectionProps) {
-  const styles = themeStyles[theme];
+  const baseStyles = themeStyles[theme];
+  const overrides = variant === "page" ? variantOverrides.page : undefined;
+  const styles = { ...baseStyles, ...overrides };
+  const content = ABOUT_VARIANTS[variant];
+  const imageClassName = [
+    "h-auto max-h-full w-full rounded-2xl object-contain object-center",
+    variant === "home" ? `border ${styles.image}` : styles.image,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <section id={id} className={styles.section}>
@@ -66,44 +102,51 @@ export default function AboutSection({
               className={`mb-5 inline-flex w-fit items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] ${styles.badge}`}
             >
               <span className="h-1.5 w-1.5 rounded-full bg-accent-secondary" />
-              About TechBuds
+              {content.badge}
             </div>
 
             <h2
               className={`text-3xl font-bold leading-tight md:text-4xl lg:text-5xl ${styles.heading}`}
             >
-              We build digital products that help businesses{" "}
-              <span className={styles.accent}>grow with confidence.</span>
+              {content.heading}{" "}
+              <span className={styles.accent}>{content.headingAccent}</span>
             </h2>
 
             <div className="mt-3 h-1 w-16 rounded-full bg-accent-secondary" />
 
-            <p className={`mt-6 text-base leading-relaxed md:text-lg ${styles.body}`}>
-              TechBuds is a digital solutions studio working with startups and
-              growing businesses across India. We partner with teams that need
-              more than a good-looking website — they need reliable products,
-              clear branding, and technology that supports real business goals.
-            </p>
-
-            <p className={`mt-4 text-base leading-relaxed md:text-lg ${styles.body}`}>
-              From strategy and design to development and launch, we stay
-              involved at every stage. Our focus is simple: deliver work that is
-              practical, scalable, and built to perform long after go-live.
-            </p>
+            {content.paragraphs.map((paragraph, index) => (
+              <p
+                key={paragraph}
+                className={`${index === 0 ? "mt-6" : "mt-4"} text-base leading-relaxed md:text-lg ${styles.body}`}
+              >
+                {paragraph}
+              </p>
+            ))}
 
             <div
-              className={`mt-8 grid grid-cols-3 gap-4 border-t pt-8 ${styles.divider}`}
+              className={`mt-8 grid w-full grid-cols-3 border-t pt-8 ${styles.divider}`}
             >
-              {ABOUT_STATS.map((stat) => (
-                <div key={stat.label}>
-                  <p className={`text-2xl font-bold md:text-3xl ${styles.accent}`}>
-                    {stat.value}
-                  </p>
-                  <p className={`mt-1 text-xs font-medium ${styles.muted}`}>
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
+              {ABOUT_EXPERTISE_BADGES.map((badge) => {
+                const Icon = expertiseIcons[badge.icon];
+
+                return (
+                  <div
+                    key={badge.label}
+                    className="flex flex-col items-center gap-1.5 text-center sm:flex-row sm:justify-center sm:gap-2.5 sm:text-left"
+                  >
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent-secondary/10 text-accent-secondary">
+                      <Icon size={16} strokeWidth={2} aria-hidden />
+                    </span>
+                    <span
+                      className={`text-xs font-semibold md:text-sm ${
+                        theme === "light" ? "text-[#334155]" : "text-primary"
+                      }`}
+                    >
+                      {badge.label}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
 
             {showLink ? (
@@ -119,9 +162,9 @@ export default function AboutSection({
 
           <div className="relative flex min-h-[280px] items-center justify-center">
             <img
-              src={ABOUT_IMAGE}
-              alt="TechBuds team collaborating on digital projects"
-              className={`h-auto max-h-full w-full rounded-2xl border object-contain object-center ${styles.image}`}
+              src={content.image}
+              alt={content.imageAlt}
+              className={imageClassName}
             />
           </div>
         </div>

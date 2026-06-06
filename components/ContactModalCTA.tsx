@@ -6,21 +6,26 @@ import {
   AtSign,
   MessageSquare,
   PhoneIcon,
-  Sparkles,
   User,
   X,
-  Zap,
 } from "lucide-react";
 import { submitStaticForm } from "@/lib/staticForms";
 
-const CTA_HIGHLIGHTS = [
-  { icon: Zap, label: "Free consultation" },
-  { icon: Sparkles, label: "48h response time" },
+const CTA_ROTATING_PHRASES = [
+  "build your brand identity",
+  "develop a custom web platform",
+  "launch a mobile application",
+  "scale your ecommerce store",
+  "automate business workflows",
+  "grow with SEO & performance",
 ];
+
+const ROTATE_INTERVAL = 3200;
 
 export default function ContactModalCTA() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [phraseVisible, setPhraseVisible] = useState(true);
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -43,21 +48,15 @@ export default function ContactModalCTA() {
   };
 
   useEffect(() => {
-    const node = sectionRef.current;
-    if (!node) return;
+    const timer = window.setInterval(() => {
+      setPhraseVisible(false);
+      window.setTimeout(() => {
+        setPhraseIndex((current) => (current + 1) % CTA_ROTATING_PHRASES.length);
+        setPhraseVisible(true);
+      }, 280);
+    }, ROTATE_INTERVAL);
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.25 },
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
+    return () => window.clearInterval(timer);
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -86,10 +85,10 @@ export default function ContactModalCTA() {
     <>
       <section
         ref={sectionRef}
-        className={`relative overflow-hidden border-t border-custom ${visible ? "cta-section-visible" : ""}`}
+        className="relative w-full overflow-hidden border-t border-custom bg-[#081124]"
       >
         <div
-          className="pointer-events-none absolute inset-0"
+          className="pointer-events-none absolute inset-0 opacity-20"
           style={{
             backgroundImage:
               "url(https://ik.imagekit.io/codebyjerry/techbuds/bg_pattern_1.png)",
@@ -97,66 +96,49 @@ export default function ContactModalCTA() {
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
           }}
+          aria-hidden
         />
-        <div className="pointer-events-none absolute inset-0 bg-[#081124]/82" />
-        <div className="cta-orb-1 pointer-events-none absolute -left-16 top-1/4 h-56 w-56 rounded-full bg-accent-secondary/[0.12] blur-3xl" />
-        <div className="cta-orb-2 pointer-events-none absolute -right-10 bottom-0 h-64 w-64 rounded-full bg-accent-secondary/[0.08] blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#081124] via-[#081124]/95 to-[#081124]/90" />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-20">
-          <div className="relative overflow-hidden rounded-3xl p-[1px]">
-            <div className="cta-glow-ring rounded-3xl" />
+        <div className="relative flex min-h-[280px] w-full flex-col items-center justify-center gap-6 px-6 py-12 md:min-h-[300px] md:flex-row md:justify-between md:gap-10 md:px-12 lg:px-16 lg:py-14">
+          <div className="w-full text-center md:max-w-3xl md:text-left">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-accent-secondary">
+              Let&rsquo;s build together
+            </p>
+            <h2 className="text-2xl font-bold leading-tight text-primary md:text-3xl lg:text-4xl">
+              Want to{" "}
+              <span
+                className={`inline-block min-w-[12ch] text-accent-secondary transition-all duration-300 md:min-w-[18ch] ${
+                  phraseVisible
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-2 opacity-0"
+                }`}
+              >
+                {CTA_ROTATING_PHRASES[phraseIndex]}
+              </span>
+              ?
+            </h2>
+            <p className="mt-3 text-sm text-secondary/80 md:text-base">
+              Tell us what you need — we&rsquo;ll help you plan, design, and ship
+              it with a focused team.
+            </p>
+          </div>
 
-            <div className="relative overflow-hidden rounded-3xl bg-white/[0.06] px-8 py-10 shadow-[0_24px_80px_rgba(0,0,0,0.35)] backdrop-blur-2xl md:px-12 md:py-12">
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(245,32,45,0.14),transparent_42%)]" />
-
-              <div className="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-                <div className="max-w-2xl text-center lg:text-left">
-                  <p className="cta-reveal-1 mb-3 inline-flex items-center gap-2 rounded-full border border-accent-secondary/25 bg-accent-secondary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-accent-secondary">
-                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent-secondary" />
-                    Let&rsquo;s Build Something Great
-                  </p>
-                  <h2 className="cta-reveal-2 text-2xl font-bold leading-tight text-primary md:text-4xl lg:text-[2.5rem]">
-                    Ready to Transform Your{" "}
-                    <span className="text-accent-secondary">Digital Presence</span>
-                    ?
-                  </h2>
-                  <p className="cta-reveal-3 mt-4 max-w-xl text-sm leading-relaxed text-secondary/85 md:text-base">
-                    From strategy and design to development and growth — we help
-                    businesses build scalable digital experiences that drive real
-                    results.
-                  </p>
-
-                  <div className="cta-reveal-4 mt-5 flex flex-wrap items-center justify-center gap-2 lg:justify-start">
-                    {CTA_HIGHLIGHTS.map(({ icon: Icon, label }) => (
-                      <span
-                        key={label}
-                        className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-[11px] font-medium text-secondary/80"
-                      >
-                        <Icon size={12} className="text-accent-secondary" />
-                        {label}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="cta-reveal-4 flex w-full shrink-0 flex-col items-center gap-3 sm:flex-row lg:w-auto lg:flex-col xl:flex-row">
-                  <button
-                    type="button"
-                    onClick={() => setOpen(true)}
-                    className="cta-btn-primary cta-btn-shimmer group inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent-secondary px-7 py-3.5 text-sm font-bold text-white transition-transform duration-300 hover:scale-[1.02] sm:w-auto"
-                  >
-                    Start Your Project
-                    <ArrowRight className="cta-btn-arrow h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                  </button>
-                  <a
-                    href="/contact"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/20 bg-white/[0.04] px-7 py-3.5 text-sm font-semibold text-primary transition-all duration-300 hover:border-accent-secondary/40 hover:bg-accent-secondary/10 hover:text-accent-secondary sm:w-auto"
-                  >
-                    Let&rsquo;s Talk
-                  </a>
-                </div>
-              </div>
-            </div>
+          <div className="flex w-full shrink-0 flex-col items-center gap-3 sm:flex-row md:w-auto">
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent-secondary px-6 py-3 text-sm font-bold text-white transition-transform duration-300 hover:scale-[1.02] sm:w-auto"
+            >
+              Start Your Project
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </button>
+            <a
+              href="/contact"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-primary transition-colors duration-300 hover:border-accent-secondary/40 hover:text-accent-secondary sm:w-auto"
+            >
+              Let&rsquo;s Talk
+            </a>
           </div>
         </div>
       </section>

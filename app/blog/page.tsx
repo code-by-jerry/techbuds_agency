@@ -1,7 +1,9 @@
+import PageHeroBanner from "@/components/PageHeroBanner";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CalendarDays, Clock } from "lucide-react";
 import { blogPosts } from "@/lib/blogs";
+import { PAGE_BANNERS } from "@/lib/page-banners";
 
 export const metadata: Metadata = {
   title: "Blog: Web, Mobile, SEO and Ecommerce Insights",
@@ -25,7 +27,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://ik.imagekit.io/codebyjerry/techbuds/Blog_desktop_hero.png",
+        url: PAGE_BANNERS.blog.image,
         width: 1200,
         height: 630,
         alt: "TechBuds Blog",
@@ -61,20 +63,7 @@ export default function Blog() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <section className="w-full overflow-hidden border-b border-custom">
-        <picture>
-          <source
-            media="(min-width: 768px)"
-            srcSet="https://ik.imagekit.io/codebyjerry/techbuds/Blog_desktop_hero.png"
-          />
-          <img
-            src="https://ik.imagekit.io/codebyjerry/techbuds/Blog_mobile_hero.png"
-            alt="TechBuds blog hero banner"
-            className="block h-auto w-full"
-            fetchPriority="high"
-          />
-        </picture>
-      </section>
+      <PageHeroBanner {...PAGE_BANNERS.blog} />
 
       <section className="border-b border-custom bg-surface/40">
         <div className="mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-20">

@@ -1,8 +1,10 @@
 import FAQSection from "@/components/FAQSection";
 import ContactModalCTA from "@/components/ContactModalCTA";
+import PageHeroBanner from "@/components/PageHeroBanner";
 import ServiceCard from "@/components/ServiceCard";
 import TechStackSection from "@/components/TechStackSection";
 import type { Metadata } from "next";
+import { PAGE_BANNERS } from "@/lib/page-banners";
 import { SERVICES } from "@/lib/services";
 import { Lightbulb, LineChart, Smartphone, Zap } from "lucide-react";
 
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
     url: "/services",
     images: [
       {
-        url: "https://ik.imagekit.io/codebyjerry/techbuds/services_hero_banner.png",
+        url: PAGE_BANNERS.services.image,
         width: 1200,
         height: 630,
         alt: "TechBuds services",
@@ -111,19 +113,7 @@ const SERVICE_PAGE_FAQ = [
 export default function Services() {
   return (
     <div className="bg-brand min-h-screen">
-      <section className="w-full border-b border-custom">
-        <picture>
-          <source
-            media="(min-width: 768px)"
-            srcSet="https://ik.imagekit.io/codebyjerry/techbuds/services_hero_banner.png"
-          />
-          <img
-            src="https://ik.imagekit.io/codebyjerry/techbuds/servive_hero_mobile.png"
-            alt="Services hero"
-            className="block h-auto w-full"
-          />
-        </picture>
-      </section>
+      <PageHeroBanner {...PAGE_BANNERS.services} />
 
       <section className="relative overflow-hidden border-b border-custom bg-[#081124]">
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-accent-secondary/5 via-transparent to-transparent" />
@@ -137,10 +127,10 @@ export default function Services() {
 
           <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center">
             <div>
-              <h1 className="text-3xl font-bold leading-tight text-primary md:text-5xl">
+              <h2 className="text-3xl font-bold leading-tight text-primary md:text-5xl">
                 Solutions Designed for{" "}
                 <span className="text-accent-secondary">Growth.</span>
-              </h1>
+              </h2>
               <div className="mt-2 h-1 w-20 rounded-full bg-accent-secondary" />
               <p className="mt-6 text-base leading-relaxed text-secondary/85 md:text-lg">
                 We craft modern digital solutions that blend strategy,
