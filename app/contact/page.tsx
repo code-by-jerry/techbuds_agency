@@ -43,7 +43,7 @@ const teamMembers = [
 const contactFaq = [
   {
     q: "How can I contact TechBuds?",
-    a: "You can contact us through the form on this page, email us at techbuds57@gmail.com, call +91 94913 12257, or message us on WhatsApp at +91 70929 36243.",
+    a: "You can contact us through the form on this page, email us at info@techbuds.online, call +91 94913 12257, or message us on WhatsApp at +91 70929 36243.",
   },
   {
     q: "How quickly do you respond to project inquiries?",
@@ -184,8 +184,8 @@ export default function Contact() {
                   {
                     icon: Mail,
                     label: "Email",
-                    value: "techbuds57@gmail.com",
-                    href: "mailto:techbuds57@gmail.com",
+                    value: "info@techbuds.online",
+                    href: "mailto:info@techbuds.online",
                   },
                   {
                     icon: Phone,

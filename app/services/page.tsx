@@ -1,7 +1,10 @@
-import Link from "next/link";
 import FAQSection from "@/components/FAQSection";
 import ContactModalCTA from "@/components/ContactModalCTA";
+import ServiceCard from "@/components/ServiceCard";
+import TechStackSection from "@/components/TechStackSection";
 import type { Metadata } from "next";
+import { SERVICES } from "@/lib/services";
+import { Lightbulb, LineChart, Smartphone, Zap } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -26,37 +29,40 @@ export const metadata: Metadata = {
   },
 };
 
-const SERVICES = [
+const SERVICE_PILLARS = [
   {
-    slug: "brand-identity",
-    label: "Brand Identity",
-    src: "https://ik.imagekit.io/codebyjerry/techbuds/brand_identity.png",
+    icon: Lightbulb,
+    title: "Strategy & Creative",
+    description:
+      "Blending design thinking with business strategy for impactful results.",
   },
   {
-    slug: "custom-web-solutions",
-    label: "Custom Web Solutions",
-    src: "https://ik.imagekit.io/codebyjerry/techbuds/web_solution.png",
+    icon: Zap,
+    title: "Technology & Scale",
+    description:
+      "Performance-first engineering built to grow with your business.",
   },
   {
-    slug: "mobile-applications",
-    label: "Mobile Applications System",
-    src: "https://ik.imagekit.io/codebyjerry/techbuds/mobile_app.png",
+    icon: Smartphone,
+    title: "UX & Experience",
+    description:
+      "Human-centered interfaces that delight users and drive conversion.",
   },
   {
-    slug: "business-platforms",
-    label: "Business Platforms",
-    src: "https://ik.imagekit.io/codebyjerry/techbuds/business_paltform_new.png",
+    icon: LineChart,
+    title: "Growth & Impact",
+    description:
+      "Data-driven strategies that deliver measurable business outcomes.",
   },
-  {
-    slug: "seo-growth",
-    label: "SEO and Growth",
-    src: "https://ik.imagekit.io/codebyjerry/techbuds/seo_growth_new.png",
-  },
-  {
-    slug: "ecommerce-digital",
-    label: "Ecommerce & Digital Solutions",
-    src: "https://ik.imagekit.io/codebyjerry/techbuds/ecommerce_new.png",
-  },
+];
+
+const SERVICE_FOCUS = [
+  "Performance",
+  "Scalability",
+  "Modern UI/UX",
+  "Business Strategy",
+  "Long-Term Growth",
+  "User-Centered Experiences",
 ];
 
 const SERVICE_PAGE_FAQ = [
@@ -104,9 +110,8 @@ const SERVICE_PAGE_FAQ = [
 
 export default function Services() {
   return (
-    <div className="bg-surface min-h-screen">
-      {/* Hero Section — image only, no overlay */}
-      <section className="w-full">
+    <div className="bg-brand min-h-screen">
+      <section className="w-full border-b border-custom">
         <picture>
           <source
             media="(min-width: 768px)"
@@ -115,250 +120,140 @@ export default function Services() {
           <img
             src="https://ik.imagekit.io/codebyjerry/techbuds/servive_hero_mobile.png"
             alt="Services hero"
-            className="w-full h-auto block"
+            className="block h-auto w-full"
           />
         </picture>
       </section>
 
-      {/* Intro Section — enhanced with icons */}
-      <section className="relative overflow-hidden border-y border-custom bg-[#081124]">
-        {/* subtle background gradient */}
+      <section className="relative overflow-hidden border-b border-custom bg-[#081124]">
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-accent-secondary/5 via-transparent to-transparent" />
+        <div className="pointer-events-none absolute -top-24 right-0 h-56 w-56 rounded-full bg-accent-secondary/[0.06] blur-3xl" />
 
-        <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24">
-          {/* badge */}
+        <div className="relative mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-24">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent-secondary/30 bg-accent-secondary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent-secondary">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-secondary animate-pulse" />
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent-secondary" />
             What We Deliver
           </div>
 
           <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center">
-            {/* left — heading + text */}
             <div>
-              <h2 className="text-3xl font-bold leading-tight text-primary md:text-5xl">
+              <h1 className="text-3xl font-bold leading-tight text-primary md:text-5xl">
                 Solutions Designed for{" "}
                 <span className="text-accent-secondary">Growth.</span>
-              </h2>
+              </h1>
               <div className="mt-2 h-1 w-20 rounded-full bg-accent-secondary" />
-              <p className="mt-6 text-secondary text-base md:text-lg leading-relaxed">
+              <p className="mt-6 text-base leading-relaxed text-secondary/85 md:text-lg">
                 We craft modern digital solutions that blend strategy,
                 creativity, and technology to help businesses build stronger
-                brands, scale faster, and deliver meaningful digital
-                experiences.
+                brands, scale faster, and deliver meaningful digital experiences.
               </p>
-              <p className="mt-4 text-secondary text-base md:text-lg leading-relaxed">
+              <p className="mt-4 text-base leading-relaxed text-secondary/85 md:text-lg">
                 From brand identity and custom platforms to mobile applications
                 and growth-driven solutions, every experience is designed with
                 performance, scalability, and long-term business impact in mind.
               </p>
             </div>
 
-            {/* right — icon cards */}
             <div className="grid gap-4 sm:grid-cols-2">
-              {/* Card 1 */}
-              <div className="group rounded-lg border border-custom bg-surface/40 p-5 transition-all duration-300 hover:border-accent-secondary/40 hover:bg-surface/80 hover:-translate-y-1">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md bg-accent-secondary/10 text-accent-secondary">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={1.5}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-sm font-bold text-primary">
-                  Strategy & Creative
-                </h3>
-                <p className="mt-1 text-xs text-secondary leading-relaxed">
-                  Blending design thinking with business strategy for impactful
-                  results.
-                </p>
-              </div>
-
-              {/* Card 2 */}
-              <div className="group rounded-lg border border-custom bg-surface/40 p-5 transition-all duration-300 hover:border-accent-secondary/40 hover:bg-surface/80 hover:-translate-y-1">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md bg-accent-secondary/10 text-accent-secondary">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={1.5}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-sm font-bold text-primary">
-                  Technology & Scale
-                </h3>
-                <p className="mt-1 text-xs text-secondary leading-relaxed">
-                  Performance-first engineering built to grow with your
-                  business.
-                </p>
-              </div>
-
-              {/* Card 3 */}
-              <div className="group rounded-lg border border-custom bg-surface/40 p-5 transition-all duration-300 hover:border-accent-secondary/40 hover:bg-surface/80 hover:-translate-y-1">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md bg-accent-secondary/10 text-accent-secondary">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={1.5}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zm-7.518-.267A8.25 8.25 0 1120.25 10.5M8.288 14.212A5.25 5.25 0 1117.25 10.5"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-sm font-bold text-primary">
-                  UX & Experience
-                </h3>
-                <p className="mt-1 text-xs text-secondary leading-relaxed">
-                  Human-centered interfaces that delight users and drive
-                  conversion.
-                </p>
-              </div>
-
-              {/* Card 4 */}
-              <div className="group rounded-lg border border-custom bg-surface/40 p-5 transition-all duration-300 hover:border-accent-secondary/40 hover:bg-surface/80 hover:-translate-y-1">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md bg-accent-secondary/10 text-accent-secondary">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={1.5}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-sm font-bold text-primary">
-                  Growth & Impact
-                </h3>
-                <p className="mt-1 text-xs text-secondary leading-relaxed">
-                  Data-driven strategies that deliver measurable business
-                  outcomes.
-                </p>
-              </div>
+              {SERVICE_PILLARS.map((pillar) => (
+                <article
+                  key={pillar.title}
+                  className="group rounded-2xl bg-white/[0.06] p-5 shadow-[0_8px_32px_rgba(0,0,0,0.2)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/[0.09]"
+                >
+                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md bg-accent-secondary/10 text-accent-secondary">
+                    <pillar.icon size={20} />
+                  </div>
+                  <h3 className="text-sm font-bold text-primary">
+                    {pillar.title}
+                  </h3>
+                  <p className="mt-1 text-xs leading-relaxed text-secondary/75">
+                    {pillar.description}
+                  </p>
+                </article>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services Grid Section — visually separated */}
-      <section className="border-y border-custom bg-[#081124]">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24">
-          <h1 className="text-3xl font-bold text-primary mb-6">Our Services</h1>
-          <p className="text-secondary mb-8 max-w-2xl">
-            Explore the services we offer. Click any card to view details.
-          </p>
+      <section className="border-b border-[#e2e8f0] bg-[#f8fafc]">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-24">
+          <div className="mb-10 max-w-2xl">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-accent-secondary">
+              Our Services
+            </p>
+            <h2 className="text-3xl font-bold text-[#1e293b] md:text-4xl">
+              Everything you need to{" "}
+              <span className="text-accent-secondary">build and grow.</span>
+            </h2>
+            <div className="mt-3 h-1 w-16 rounded-full bg-accent-secondary" />
+            <p className="mt-4 text-base leading-relaxed text-[#64748b]">
+              Explore the services we offer. Click any card to view details.
+            </p>
+          </div>
 
           <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
-            {SERVICES.map((s) => (
-              <Link
-                key={s.slug}
-                href={`/services/${s.slug}`}
-                className="block group"
-              >
-                <div className="overflow-hidden rounded-md bg-[#0b1226] shadow-sm transition-colors duration-300">
-                  <div className="relative h-[220px] sm:h-[260px] md:h-[320px] w-full overflow-hidden">
-                    <img
-                      src={s.src}
-                      alt={s.label}
-                      className="h-full w-full object-cover"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-                  </div>
-                  <div className="py-4 px-4 text-center">
-                    <p className="text-primary font-semibold">{s.label}</p>
-                  </div>
-                </div>
-              </Link>
+            {SERVICES.map((service, index) => (
+              <ServiceCard
+                key={service.slug}
+                service={service}
+                theme="light"
+                index={index}
+              />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Service Page Content + FAQ + CTA */}
-      <section className="border-y border-custom bg-[#081124] text-secondary">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24">
-          <div className="mx-auto max-w-4xl rounded-[2rem] border border-white/10 bg-surface/80 p-10 shadow-[0_30px_90px_rgba(0,0,0,0.25)] ring-1 ring-white/10 backdrop-blur-xl">
-            <h2 className="text-3xl font-bold text-primary md:text-4xl">
-              Our Services
-            </h2>
-            <p className="mt-6 text-secondary text-base leading-8 md:text-lg">
-              At TechBuds, we build modern digital solutions that help
-              businesses grow, scale, and create meaningful digital experiences.
-              From branding and custom platforms to mobile applications,
-              ecommerce systems, and growth-focused strategies, our services are
-              designed to combine creativity, technology, and performance into
-              scalable business solutions.
-            </p>
-            <p className="mt-4 text-secondary text-base leading-8 md:text-lg">
-              We focus on creating clean, future-ready digital products that
-              improve user experience, strengthen brand presence, and support
-              long-term business goals.
-            </p>
+      <TechStackSection />
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              {[
-                "Performance",
-                "Scalability",
-                "Modern UI/UX",
-                "Business Strategy",
-                "Long-Term Growth",
-                "User-Centered Experiences",
-              ].map((item) => (
+      <section className="border-y border-[#e2e8f0] bg-[#f8fafc]">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-24">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
+            <div>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-accent-secondary">
+                Why TechBuds
+              </p>
+              <h2 className="text-3xl font-bold text-[#1e293b] md:text-4xl">
+                Built for performance,{" "}
+                <span className="text-accent-secondary">designed to scale.</span>
+              </h2>
+              <div className="mt-3 h-1 w-16 rounded-full bg-accent-secondary" />
+              <p className="mt-5 text-base leading-relaxed text-[#475569] md:text-lg">
+                At TechBuds, we build modern digital solutions that help
+                businesses grow, scale, and create meaningful digital
+                experiences. From branding and custom platforms to mobile
+                applications and growth-focused strategies, our work combines
+                creativity, technology, and performance.
+              </p>
+              <p className="mt-4 text-base leading-relaxed text-[#475569] md:text-lg">
+                Our goal is simple — to help businesses transform ideas into
+                impactful digital experiences through modern technology and
+                strategic execution.
+              </p>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              {SERVICE_FOCUS.map((item) => (
                 <div
                   key={item}
-                  className="rounded-3xl border border-white/10 bg-[#0e172f] px-4 py-4 text-sm text-secondary/80"
+                  className="rounded-2xl bg-white px-4 py-4 text-sm font-medium text-[#475569] shadow-[0_8px_30px_rgba(15,23,42,0.06)] transition-transform duration-300 hover:-translate-y-0.5"
                 >
                   {item}
                 </div>
               ))}
             </div>
-
-            <p className="mt-8 text-secondary text-base leading-8 md:text-lg">
-              Our goal is simple — to help businesses transform ideas into
-              impactful digital experiences through modern technology and
-              strategic execution.
-            </p>
           </div>
-
-          <div className="mt-16">
-            <FAQSection
-              title="Frequently Asked Questions"
-              list={SERVICE_PAGE_FAQ}
-            />
-          </div>
-
-          <div className="mt-16">
-            <ContactModalCTA />
-          </div>
-        </div>{" "}
+        </div>
       </section>
+
+      <FAQSection
+        title="Frequently Asked Questions"
+        list={SERVICE_PAGE_FAQ}
+        theme="dark"
+      />
+
+      <ContactModalCTA />
     </div>
   );
 }

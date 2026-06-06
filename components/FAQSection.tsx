@@ -3,20 +3,62 @@ type FAQItem = {
   a: string;
 };
 
+type FAQTheme = "light" | "dark";
+
 interface FAQSectionProps {
   title: string;
   list: FAQItem[];
+  theme?: FAQTheme;
 }
 
-export default function FAQSection({ title, list }: FAQSectionProps) {
+const faqThemes: Record<
+  FAQTheme,
+  {
+    section: string;
+    item: string;
+    itemOpen: string;
+    summary: string;
+    answer: string;
+    answerBorder: string;
+  }
+> = {
+  dark: {
+    section: "border-t border-custom bg-[#081124]",
+    item: "border-custom bg-surface/30",
+    itemOpen: "open:border-accent-secondary/30 open:bg-accent-secondary/[0.02]",
+    summary: "text-primary",
+    answer: "text-secondary/80",
+    answerBorder: "border-custom",
+  },
+  light: {
+    section: "border-y border-[#e2e8f0] bg-[#f8fafc]",
+    item: "border-[#e2e8f0] bg-white shadow-sm",
+    itemOpen: "open:border-accent-secondary/30 open:shadow-md",
+    summary: "text-[#1e293b]",
+    answer: "text-[#64748b]",
+    answerBorder: "border-[#e2e8f0]",
+  },
+};
+
+export default function FAQSection({
+  title,
+  list,
+  theme = "dark",
+}: FAQSectionProps) {
+  const styles = faqThemes[theme];
+
   return (
-    <section className="relative overflow-hidden border-t border-custom bg-[#081124]">
-      <div className="relative max-w-4xl mx-auto px-6 md:px-12 py-20 md:py-28">
-        <div className="text-center mb-14">
+    <section className={`relative overflow-hidden ${styles.section}`}>
+      <div className="relative mx-auto max-w-4xl px-6 py-20 md:px-12 md:py-28">
+        <div className="mb-14 text-center">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-accent-secondary">
             Got Questions?
           </p>
-          <h2 className="text-3xl font-bold text-primary md:text-5xl">
+          <h2
+            className={`text-3xl font-bold md:text-5xl ${
+              theme === "light" ? "text-[#1e293b]" : "text-primary"
+            }`}
+          >
             {title}
           </h2>
           <div className="mx-auto mt-3 h-0.5 w-16 rounded-full bg-accent-secondary" />
@@ -26,14 +68,16 @@ export default function FAQSection({ title, list }: FAQSectionProps) {
           {list.map((item, index) => (
             <details
               key={index}
-              className="group rounded-xl border border-custom bg-surface/30 transition-all duration-300 open:border-accent-secondary/30 open:bg-accent-secondary/[0.02]"
+              className={`group rounded-xl border transition-all duration-300 ${styles.item} ${styles.itemOpen}`}
             >
               <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left transition-colors duration-300 hover:text-accent-secondary [&::-webkit-details-marker]:hidden">
                 <span className="flex items-start gap-3">
                   <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent-secondary/10 text-xs font-bold text-accent-secondary">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-sm font-semibold text-primary group-open:text-accent-secondary md:text-base">
+                  <span
+                    className={`text-sm font-semibold group-open:text-accent-secondary md:text-base ${styles.summary}`}
+                  >
                     {item.q}
                   </span>
                 </span>
@@ -52,8 +96,8 @@ export default function FAQSection({ title, list }: FAQSectionProps) {
                   />
                 </svg>
               </summary>
-              <div className="border-t border-custom px-6 py-5">
-                <p className="text-sm text-secondary/80 leading-relaxed md:text-base">
+              <div className={`border-t px-6 py-5 ${styles.answerBorder}`}>
+                <p className={`text-sm leading-relaxed md:text-base ${styles.answer}`}>
                   {item.a}
                 </p>
               </div>

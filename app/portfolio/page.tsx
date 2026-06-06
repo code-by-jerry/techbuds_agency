@@ -1,19 +1,21 @@
 import ContactModalCTA from "@/components/ContactModalCTA";
 import FAQSection from "@/components/FAQSection";
+import PortfolioShowcase from "@/components/PortfolioShowcase";
 import TestimonialSlider from "@/components/TestimonialSlider";
+import { PORTFOLIO_PROJECTS } from "@/lib/portfolio";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Portfolio",
   description:
-    "Explore TechBuds portfolio projects across food delivery, q-commerce, healthcare, accounting, design, software-defined vehicles, and ecommerce platforms.",
+    "Explore TechBuds portfolio — Enmart q-commerce, Camiprod healthcare ecommerce, Paalu Predictor AI milk analysis, and Destro Solutions SDV platform.",
   alternates: {
     canonical: "/portfolio",
   },
   openGraph: {
     title: "TechBuds Portfolio",
     description:
-      "A selection of digital platforms, ecommerce systems, mobile products, and brand experiences built by TechBuds.",
+      "Real product work across q-commerce, healthcare ecommerce, AI mobile apps, and software-defined vehicle platforms.",
     url: "/portfolio",
     images: [
       {
@@ -26,55 +28,10 @@ export const metadata: Metadata = {
   },
 };
 
-const portfolioItems = [
-  {
-    name: "Aaran Info",
-    category: "Accounts Consultancy & Billing Software",
-    description:
-      "A digital platform providing accounting consultancy services and smart billing solutions designed to simplify financial operations and business management.",
-    logo: "https://ik.imagekit.io/codebyjerry/contibutions%20-%20logo/aaraninfo.png?updatedAt=1777100866170",
-  },
-  {
-    name: "Camiprod",
-    category: "Healthcare Products Platform",
-    description:
-      "A healthcare-focused digital platform built to showcase and manage medical and wellness products with a clean and trustworthy user experience.",
-    logo: "https://ik.imagekit.io/codebyjerry/contibutions%20-%20logo/logo.svg",
-  },
-  {
-    name: "Baybee",
-    category: "Q-Commerce Baby Products",
-    description:
-      "A quick-commerce platform dedicated to baby care essentials, offering fast delivery, smooth shopping experiences, and user-friendly product discovery.",
-    logo: "https://ik.imagekit.io/codebyjerry/contibutions%20-%20logo/Baybee_logo.svg",
-  },
-  {
-    name: "Pixora",
-    category: "Graphic Designing Services",
-    description:
-      "A creative branding and graphic design platform delivering modern visual identity solutions, marketing creatives, and digital design services.",
-    logo: "https://ik.imagekit.io/codebyjerry/contibutions%20-%20logo/pixora_new_white.png?updatedAt=1779039491768",
-  },
-  {
-    name: "DestroSolution",
-    category: "Software Defined Vehicles",
-    description:
-      "A technology-focused platform centered around software-defined vehicle solutions, innovation systems, and future-ready mobility technologies.",
-    logo: "https://ik.imagekit.io/codebyjerry/contibutions%20-%20logo/destrosolutions_new.png",
-  },
-  {
-    name: "Enmart",
-    category: "Q-Commerce Platform",
-    description:
-      "A scalable quick-commerce solution designed for fast-moving online shopping experiences with optimized delivery workflows and modern ecommerce systems.",
-    logo: "https://ik.imagekit.io/codebyjerry/contibutions%20-%20logo/enmart_logo.png",
-  },
-];
-
 const portfolioFaq = [
   {
     q: "What types of portfolio projects does TechBuds handle?",
-    a: "We build ecommerce, quick-commerce, SaaS, billing systems, healthcare platforms, mobile apps, and custom business software for growing brands.",
+    a: "We build q-commerce platforms, healthcare ecommerce stores, AI-powered mobile apps, automotive technology websites, SaaS products, and custom business software.",
   },
   {
     q: "Can you build a platform similar to one of these projects?",
@@ -113,62 +70,55 @@ export default function Portfolio() {
       </section>
 
       <section className="relative overflow-hidden border-b border-custom bg-[#081124]">
-        <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[600px] -translate-x-1/2 rounded-full bg-red-500/[0.04] blur-3xl" />
+        <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[600px] -translate-x-1/2 rounded-full bg-accent-secondary/[0.06] blur-3xl" />
 
-        <div className="relative mx-auto max-w-6xl px-6 py-16 md:px-12 md:py-20">
-          <div className="mb-10">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-red-400">
+        <div className="relative mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-20">
+          <div className="mb-10 max-w-3xl">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-accent-secondary">
               Portfolio
             </p>
             <h1 className="text-3xl font-bold text-primary md:text-5xl">
-              Work We Have <span className="text-red-400">Built</span>
+              Work We Have <span className="text-accent-secondary">Built</span>
             </h1>
-            <div className="mt-3 h-0.5 w-16 rounded-full bg-red-400" />
+            <div className="mt-3 h-0.5 w-16 rounded-full bg-accent-secondary" />
+            <p className="mt-5 text-base leading-relaxed text-secondary/85 md:text-lg">
+              Real platforms and products across q-commerce, healthcare
+              ecommerce, AI-powered mobile apps, and software-defined vehicle
+              technology — with full screenshot galleries for each project.
+            </p>
           </div>
 
-          <div className="grid gap-5">
-            {portfolioItems.map((item) => (
-              <article
-                key={item.name}
-                className="grid gap-6 rounded-xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-xl transition-all duration-300 hover:border-red-400/30 hover:bg-white/[0.05] md:grid-cols-[220px_1fr] md:items-center md:p-7"
+          <nav
+            aria-label="Portfolio projects"
+            className="mb-12 flex flex-wrap gap-2"
+          >
+            {PORTFOLIO_PROJECTS.map((project) => (
+              <a
+                key={project.slug}
+                href={`#${project.slug}`}
+                className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm font-medium text-secondary/85 transition-colors hover:border-accent-secondary/40 hover:bg-accent-secondary/10 hover:text-primary"
               >
-                <div className="flex h-28 items-center justify-center rounded-lg border border-white/10 bg-[#0b1226] px-6">
-                  <img
-                    src={item.logo}
-                    alt={`${item.name} logo`}
-                    className="max-h-14 max-w-full object-contain filter brightness-0 invert"
-                  />
-                </div>
-
-                <div className="max-w-3xl">
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-red-400">
-                    {item.category}
-                  </p>
-                  <h2 className="mt-2 text-2xl font-bold text-primary md:text-3xl">
-                    {item.name}
-                  </h2>
-                  <p className="mt-3 text-sm leading-7 text-secondary/80 md:text-base">
-                    {item.description}
-                  </p>
-                </div>
-              </article>
+                {project.name}
+              </a>
             ))}
-          </div>
+          </nav>
+
+          <PortfolioShowcase />
         </div>
       </section>
 
       <section className="relative overflow-hidden border-t border-custom bg-surface">
-        <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[600px] -translate-x-1/2 rounded-full bg-red-500/[0.04] blur-3xl" />
+        <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[600px] -translate-x-1/2 rounded-full bg-accent-secondary/[0.04] blur-3xl" />
 
         <div className="relative mx-auto max-w-7xl px-6 py-20 md:px-12 md:py-28">
           <div className="mb-14 text-center">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-red-400">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-accent-secondary">
               Testimonials
             </p>
             <h2 className="text-3xl font-bold text-primary md:text-5xl">
-              What Our <span className="text-red-400">Clients Say</span>
+              What Our <span className="text-accent-secondary">Clients Say</span>
             </h2>
-            <div className="mx-auto mt-3 h-0.5 w-16 rounded-full bg-red-400" />
+            <div className="mx-auto mt-3 h-0.5 w-16 rounded-full bg-accent-secondary" />
             <p className="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-secondary md:text-lg">
               Real feedback from the brands and businesses we&rsquo;ve had the
               privilege to work with.

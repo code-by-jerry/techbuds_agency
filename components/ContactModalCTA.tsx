@@ -1,17 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
   AtSign,
   MessageSquare,
   PhoneIcon,
+  Sparkles,
   User,
   X,
+  Zap,
 } from "lucide-react";
 import { submitStaticForm } from "@/lib/staticForms";
 
+const CTA_HIGHLIGHTS = [
+  { icon: Zap, label: "Free consultation" },
+  { icon: Sparkles, label: "48h response time" },
+];
+
 export default function ContactModalCTA() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -32,6 +41,24 @@ export default function ContactModalCTA() {
       setStatus("idle");
     }
   };
+
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,7 +84,10 @@ export default function ContactModalCTA() {
 
   return (
     <>
-      <section className="relative overflow-hidden border-t border-custom">
+      <section
+        ref={sectionRef}
+        className={`relative overflow-hidden border-t border-custom ${visible ? "cta-section-visible" : ""}`}
+      >
         <div
           className="pointer-events-none absolute inset-0"
           style={{
@@ -68,43 +98,63 @@ export default function ContactModalCTA() {
             backgroundRepeat: "no-repeat",
           }}
         />
-        <div className="pointer-events-none absolute inset-0 bg-[#081124]/80" />
+        <div className="pointer-events-none absolute inset-0 bg-[#081124]/82" />
+        <div className="cta-orb-1 pointer-events-none absolute -left-16 top-1/4 h-56 w-56 rounded-full bg-accent-secondary/[0.12] blur-3xl" />
+        <div className="cta-orb-2 pointer-events-none absolute -right-10 bottom-0 h-64 w-64 rounded-full bg-accent-secondary/[0.08] blur-3xl" />
 
-        <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20">
-          <div className="relative rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-2xl px-8 py-12 md:px-14 md:py-14 shadow-2xl shadow-black/30">
-            <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-red-500/10" />
+        <div className="relative mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-20">
+          <div className="relative overflow-hidden rounded-3xl p-[1px]">
+            <div className="cta-glow-ring rounded-3xl" />
 
-            <div className="flex flex-col items-center gap-6 md:flex-row md:justify-between md:gap-10">
-              <div className="max-w-2xl text-center md:text-left">
-                <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-red-400">
-                  Let&rsquo;s Build Something Great
-                </p>
-                <h2 className="text-2xl font-bold leading-tight text-primary md:text-4xl">
-                  Ready to Transform Your{" "}
-                  <span className="text-red-400">Digital Presence</span>?
-                </h2>
-                <p className="mt-3 text-secondary text-sm md:text-base leading-relaxed max-w-xl">
-                  From strategy and design to development and growth — we help
-                  businesses build scalable digital experiences that drive real
-                  results.
-                </p>
-              </div>
+            <div className="relative overflow-hidden rounded-3xl bg-white/[0.06] px-8 py-10 shadow-[0_24px_80px_rgba(0,0,0,0.35)] backdrop-blur-2xl md:px-12 md:py-12">
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(245,32,45,0.14),transparent_42%)]" />
 
-              <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
-                <button
-                  type="button"
-                  onClick={() => setOpen(true)}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-red-500 px-6 py-3 text-sm font-bold text-white transition-all duration-300 hover:bg-red-600 hover:shadow-[0_0_30px_rgba(255,90,95,0.4)] hover:-translate-y-0.5"
-                >
-                  Start Your Project
-                  <ArrowRight className="h-4 w-4" />
-                </button>
-                <a
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-primary transition-all duration-300 hover:border-red-400/40 hover:bg-red-500/10 hover:text-red-400 hover:-translate-y-0.5"
-                >
-                  Let&rsquo;s Talk
-                </a>
+              <div className="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+                <div className="max-w-2xl text-center lg:text-left">
+                  <p className="cta-reveal-1 mb-3 inline-flex items-center gap-2 rounded-full border border-accent-secondary/25 bg-accent-secondary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-accent-secondary">
+                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent-secondary" />
+                    Let&rsquo;s Build Something Great
+                  </p>
+                  <h2 className="cta-reveal-2 text-2xl font-bold leading-tight text-primary md:text-4xl lg:text-[2.5rem]">
+                    Ready to Transform Your{" "}
+                    <span className="text-accent-secondary">Digital Presence</span>
+                    ?
+                  </h2>
+                  <p className="cta-reveal-3 mt-4 max-w-xl text-sm leading-relaxed text-secondary/85 md:text-base">
+                    From strategy and design to development and growth — we help
+                    businesses build scalable digital experiences that drive real
+                    results.
+                  </p>
+
+                  <div className="cta-reveal-4 mt-5 flex flex-wrap items-center justify-center gap-2 lg:justify-start">
+                    {CTA_HIGHLIGHTS.map(({ icon: Icon, label }) => (
+                      <span
+                        key={label}
+                        className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-[11px] font-medium text-secondary/80"
+                      >
+                        <Icon size={12} className="text-accent-secondary" />
+                        {label}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="cta-reveal-4 flex w-full shrink-0 flex-col items-center gap-3 sm:flex-row lg:w-auto lg:flex-col xl:flex-row">
+                  <button
+                    type="button"
+                    onClick={() => setOpen(true)}
+                    className="cta-btn-primary cta-btn-shimmer group inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent-secondary px-7 py-3.5 text-sm font-bold text-white transition-transform duration-300 hover:scale-[1.02] sm:w-auto"
+                  >
+                    Start Your Project
+                    <ArrowRight className="cta-btn-arrow h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  </button>
+                  <a
+                    href="/contact"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/20 bg-white/[0.04] px-7 py-3.5 text-sm font-semibold text-primary transition-all duration-300 hover:border-accent-secondary/40 hover:bg-accent-secondary/10 hover:text-accent-secondary sm:w-auto"
+                  >
+                    Let&rsquo;s Talk
+                  </a>
+                </div>
               </div>
             </div>
           </div>
