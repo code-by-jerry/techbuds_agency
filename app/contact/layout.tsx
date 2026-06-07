@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PAGE_BANNERS } from "@/lib/page-banners";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     url: "/contact",
     images: [
       {
-        url: "https://ik.imagekit.io/codebyjerry/techbuds/contact_web_new.png",
+        url: PAGE_BANNERS.contact.image,
         width: 1200,
         height: 630,
         alt: "Contact TechBuds",

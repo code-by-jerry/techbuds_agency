@@ -1,4 +1,5 @@
 import { Inter, Poppins } from "next/font/google";
+import ContactModalProvider from "@/components/ContactModalProvider";
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -82,11 +83,13 @@ export default function RootLayout({
         className={`${inter.variable} ${poppins.variable}`}
         suppressHydrationWarning
       >
-        <Header />
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
-        <WhatsAppFloatingButton />
+        <ContactModalProvider>
+          <Header />
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+          <WhatsAppFloatingButton />
+        </ContactModalProvider>
       </body>
     </html>
   );

@@ -6,11 +6,9 @@ import Link from "next/link";
 import { HOME_FEATURED_PROJECTS } from "@/lib/portfolio";
 
 const SLIDE_DURATION_MS = 6000;
-const PREVIEW_VIEWPORT =
-  "h-[380px] sm:h-[420px] lg:h-[460px]";
 
-const PREVIEW_IMAGE_CLASS =
-  "h-full w-full object-contain object-center";
+const PREVIEW_IMAGE_SIZE =
+  "max-h-[min(320px,42vh)] w-auto max-w-full sm:max-h-[min(380px,46vh)] lg:max-h-[min(440px,52vh)]";
 
 export default function FeaturedProjects() {
   const [active, setActive] = useState(0);
@@ -61,8 +59,8 @@ export default function FeaturedProjects() {
         </div>
 
         <div className="overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.05] to-white/[0.01] shadow-2xl shadow-black/40">
-          <div className="grid min-h-[520px] lg:grid-cols-[1.2fr_0.8fr]">
-            <div className="featured-preview-grid relative flex flex-col bg-[#0a1020] p-5 md:p-8">
+          <div className="grid lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+            <div className="featured-preview-grid relative flex flex-col bg-[#0a1020] p-4 md:p-6 lg:py-8">
               <div className="mb-4 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="rounded-full border border-accent-secondary/30 bg-accent-secondary/10 px-3 py-1 text-[11px] font-bold tracking-widest text-accent-secondary">
@@ -77,30 +75,26 @@ export default function FeaturedProjects() {
                 </p>
               </div>
 
-              <div className="relative mx-auto w-full max-w-xl overflow-hidden rounded-2xl border border-white/10 bg-[#050b18] shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
-                <div className="flex items-center gap-2 border-b border-white/10 bg-[#0d1528] px-4 py-2.5">
+              <div className="relative mx-auto w-fit max-w-full overflow-hidden rounded-2xl border border-white/10 shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
+                <div className="flex items-center gap-2 border-b border-white/10 bg-[#0d1528] px-3 py-2">
                   <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
                   <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
                   <span className="h-2.5 w-2.5 rounded-full bg-accent-secondary/70" />
-                  <div className="ml-2 h-6 flex-1 rounded-md bg-white/[0.04]" />
+                  <div className="ml-2 h-5 flex-1 rounded-md bg-white/[0.04]" />
                 </div>
 
-                <div className={`relative ${PREVIEW_VIEWPORT} overflow-hidden bg-[#050b18]`}>
+                <div className="relative flex justify-center overflow-hidden leading-[0]">
                   {HOME_FEATURED_PROJECTS.map((item, index) => (
-                    <div
+                    <img
                       key={item.slug}
-                      className={`absolute inset-0 flex items-center justify-center transition-opacity duration-700 ease-out ${
+                      src={item.previewImage}
+                      alt={`${item.name} preview`}
+                      className={`block h-auto transition-opacity duration-700 ease-out ${PREVIEW_IMAGE_SIZE} ${
                         index === active
-                          ? "z-10 opacity-100"
-                          : "z-0 opacity-0"
+                          ? "relative z-10 opacity-100"
+                          : "pointer-events-none absolute z-0 opacity-0"
                       }`}
-                    >
-                      <img
-                        src={item.previewImage}
-                        alt={`${item.name} preview`}
-                        className={PREVIEW_IMAGE_CLASS}
-                      />
-                    </div>
+                    />
                   ))}
                 </div>
               </div>
@@ -134,7 +128,7 @@ export default function FeaturedProjects() {
               </div>
             </div>
 
-            <div className="flex flex-col justify-between border-t border-white/10 p-6 md:p-8 lg:border-l lg:border-t-0 lg:p-10">
+            <div className="flex flex-col justify-center border-t border-white/10 p-6 md:p-8 lg:border-l lg:border-t-0 lg:p-10">
               <div key={slideKey} className="featured-content-enter">
                 <p className="inline-flex rounded-full border border-accent-secondary/25 bg-accent-secondary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent-secondary">
                   {project.category}
@@ -170,22 +164,22 @@ export default function FeaturedProjects() {
                     </span>
                   ))}
                 </div>
-              </div>
 
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  href={`/portfolio#${project.slug}`}
-                  className="inline-flex items-center gap-2 rounded-full bg-accent-secondary px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-                >
-                  View case study
-                  <ExternalLink size={15} />
-                </Link>
-                <Link
-                  href="/portfolio"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-accent-secondary/40 hover:text-accent-secondary"
-                >
-                  All projects
-                </Link>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Link
+                    href={`/portfolio#${project.slug}`}
+                    className="inline-flex items-center gap-2 rounded-full bg-accent-secondary px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                  >
+                    View case study
+                    <ExternalLink size={15} />
+                  </Link>
+                  <Link
+                    href="/portfolio"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-accent-secondary/40 hover:text-accent-secondary"
+                  >
+                    All projects
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

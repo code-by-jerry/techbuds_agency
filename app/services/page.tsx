@@ -1,12 +1,14 @@
 import FAQSection from "@/components/FAQSection";
 import ContactModalCTA from "@/components/ContactModalCTA";
 import PageHeroBanner from "@/components/PageHeroBanner";
-import ServiceCard from "@/components/ServiceCard";
+import ServicesIndexSection from "@/components/ServicesIndexSection";
+import ServicesWhySection from "@/components/ServicesWhySection";
 import TechStackSection from "@/components/TechStackSection";
 import type { Metadata } from "next";
 import { PAGE_BANNERS } from "@/lib/page-banners";
-import { SERVICES } from "@/lib/services";
-import { Lightbulb, LineChart, Smartphone, Zap } from "lucide-react";
+
+const SERVICE_INFO_IMAGE =
+  "https://ik.imagekit.io/codebyjerry/techbuds/Service-info.png";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -31,40 +33,11 @@ export const metadata: Metadata = {
   },
 };
 
-const SERVICE_PILLARS = [
-  {
-    icon: Lightbulb,
-    title: "Strategy & Creative",
-    description:
-      "Blending design thinking with business strategy for impactful results.",
-  },
-  {
-    icon: Zap,
-    title: "Technology & Scale",
-    description:
-      "Performance-first engineering built to grow with your business.",
-  },
-  {
-    icon: Smartphone,
-    title: "UX & Experience",
-    description:
-      "Human-centered interfaces that delight users and drive conversion.",
-  },
-  {
-    icon: LineChart,
-    title: "Growth & Impact",
-    description:
-      "Data-driven strategies that deliver measurable business outcomes.",
-  },
-];
-
-const SERVICE_FOCUS = [
-  "Performance",
-  "Scalability",
-  "Modern UI/UX",
-  "Business Strategy",
-  "Long-Term Growth",
-  "User-Centered Experiences",
+const SERVICE_DELIVERY_POINTS = [
+  "Clear scope, honest timelines, and practical recommendations",
+  "Design and development handled by one focused team",
+  "Built for real users — not just launch-day screenshots",
+  "Support that continues after your product goes live",
 ];
 
 const SERVICE_PAGE_FAQ = [
@@ -115,127 +88,63 @@ export default function Services() {
     <div className="bg-brand min-h-screen">
       <PageHeroBanner {...PAGE_BANNERS.services} />
 
-      <section className="relative overflow-hidden border-b border-custom bg-[#081124]">
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-accent-secondary/5 via-transparent to-transparent" />
-        <div className="pointer-events-none absolute -top-24 right-0 h-56 w-56 rounded-full bg-accent-secondary/[0.06] blur-3xl" />
-
-        <div className="relative mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-24">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent-secondary/30 bg-accent-secondary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent-secondary">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent-secondary" />
-            What We Deliver
-          </div>
-
-          <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center">
-            <div>
-              <h2 className="text-3xl font-bold leading-tight text-primary md:text-5xl">
-                Solutions Designed for{" "}
-                <span className="text-accent-secondary">Growth.</span>
-              </h2>
-              <div className="mt-2 h-1 w-20 rounded-full bg-accent-secondary" />
-              <p className="mt-6 text-base leading-relaxed text-secondary/85 md:text-lg">
-                We craft modern digital solutions that blend strategy,
-                creativity, and technology to help businesses build stronger
-                brands, scale faster, and deliver meaningful digital experiences.
-              </p>
-              <p className="mt-4 text-base leading-relaxed text-secondary/85 md:text-lg">
-                From brand identity and custom platforms to mobile applications
-                and growth-driven solutions, every experience is designed with
-                performance, scalability, and long-term business impact in mind.
-              </p>
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-2">
-              {SERVICE_PILLARS.map((pillar) => (
-                <article
-                  key={pillar.title}
-                  className="group rounded-2xl bg-white/[0.06] p-5 shadow-[0_8px_32px_rgba(0,0,0,0.2)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/[0.09]"
-                >
-                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md bg-accent-secondary/10 text-accent-secondary">
-                    <pillar.icon size={20} />
-                  </div>
-                  <h3 className="text-sm font-bold text-primary">
-                    {pillar.title}
-                  </h3>
-                  <p className="mt-1 text-xs leading-relaxed text-secondary/75">
-                    {pillar.description}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-[#e2e8f0] bg-[#f8fafc]">
+      <section className="border-b border-[#e2e8f0] bg-white">
         <div className="mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-24">
-          <div className="mb-10 max-w-2xl">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-accent-secondary">
-              Our Services
-            </p>
-            <h2 className="text-3xl font-bold text-[#1e293b] md:text-4xl">
-              Everything you need to{" "}
-              <span className="text-accent-secondary">build and grow.</span>
-            </h2>
-            <div className="mt-3 h-1 w-16 rounded-full bg-accent-secondary" />
-            <p className="mt-4 text-base leading-relaxed text-[#64748b]">
-              Explore the services we offer. Click any card to view details.
-            </p>
-          </div>
-
-          <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
-            {SERVICES.map((service, index) => (
-              <ServiceCard
-                key={service.slug}
-                service={service}
-                theme="light"
-                index={index}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <TechStackSection />
-
-      <section className="border-y border-[#e2e8f0] bg-[#f8fafc]">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-24">
-          <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-14">
             <div>
-              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-accent-secondary">
-                Why TechBuds
-              </p>
-              <h2 className="text-3xl font-bold text-[#1e293b] md:text-4xl">
-                Built for performance,{" "}
-                <span className="text-accent-secondary">designed to scale.</span>
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent-secondary/20 bg-accent-secondary/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent-secondary">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent-secondary" />
+                What We Deliver
+              </div>
+
+              <h2 className="text-3xl font-bold leading-tight text-[#1e293b] md:text-4xl lg:text-5xl">
+                Digital work that helps businesses{" "}
+                <span className="text-accent-secondary">move forward.</span>
               </h2>
               <div className="mt-3 h-1 w-16 rounded-full bg-accent-secondary" />
-              <p className="mt-5 text-base leading-relaxed text-[#475569] md:text-lg">
-                At TechBuds, we build modern digital solutions that help
-                businesses grow, scale, and create meaningful digital
-                experiences. From branding and custom platforms to mobile
-                applications and growth-focused strategies, our work combines
-                creativity, technology, and performance.
+
+              <p className="mt-6 text-base leading-relaxed text-[#475569] md:text-lg">
+                We work with founders and teams who need more than a polished
+                website — they need products, platforms, and brands that actually
+                support day-to-day operations and long-term growth.
               </p>
               <p className="mt-4 text-base leading-relaxed text-[#475569] md:text-lg">
-                Our goal is simple — to help businesses transform ideas into
-                impactful digital experiences through modern technology and
-                strategic execution.
+                From early strategy and UI design to development, launch, and
+                ongoing improvements, we stay involved so you always know where the
+                project stands and what comes next.
               </p>
+
+              <ul className="mt-8 space-y-3">
+                {SERVICE_DELIVERY_POINTS.map((point) => (
+                  <li
+                    key={point}
+                    className="flex items-start gap-3 text-sm text-[#475569] md:text-base"
+                  >
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-secondary" />
+                    {point}
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-2">
-              {SERVICE_FOCUS.map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl bg-white px-4 py-4 text-sm font-medium text-[#475569] shadow-[0_8px_30px_rgba(15,23,42,0.06)] transition-transform duration-300 hover:-translate-y-0.5"
-                >
-                  {item}
-                </div>
-              ))}
+            <div className="flex items-center justify-center">
+              <img
+                src={SERVICE_INFO_IMAGE}
+                alt="TechBuds services — strategy, design, development, and growth"
+                className="h-auto w-full max-w-xl rounded-2xl object-contain lg:max-w-none"
+              />
             </div>
           </div>
         </div>
       </section>
+
+      <section className="border-b border-custom">
+        <ServicesIndexSection />
+      </section>
+
+      <ServicesWhySection />
+
+      <TechStackSection />
 
       <FAQSection
         title="Frequently Asked Questions"

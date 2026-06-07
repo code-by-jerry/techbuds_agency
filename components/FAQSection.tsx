@@ -24,11 +24,11 @@ const faqThemes: Record<
 > = {
   dark: {
     section: "border-t border-custom bg-[#081124]",
-    item: "border-custom bg-surface/30",
-    itemOpen: "open:border-accent-secondary/30 open:bg-accent-secondary/[0.02]",
+    item: "bg-white/[0.04] backdrop-blur-sm",
+    itemOpen: "open:bg-white/[0.07] open:shadow-[0_8px_32px_rgba(0,0,0,0.2)]",
     summary: "text-primary",
     answer: "text-secondary/80",
-    answerBorder: "border-custom",
+    answerBorder: "border-white/10",
   },
   light: {
     section: "border-y border-[#e2e8f0] bg-[#f8fafc]",
@@ -68,7 +68,7 @@ export default function FAQSection({
           {list.map((item, index) => (
             <details
               key={index}
-              className={`group rounded-xl border transition-all duration-300 ${styles.item} ${styles.itemOpen}`}
+              className={`group rounded-2xl transition-all duration-300 ${styles.item} ${styles.itemOpen}`}
             >
               <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left transition-colors duration-300 hover:text-accent-secondary [&::-webkit-details-marker]:hidden">
                 <span className="flex items-start gap-3">

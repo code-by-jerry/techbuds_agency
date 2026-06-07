@@ -43,4 +43,13 @@ export const PAGE_BANNERS = {
     description:
       "Practical guides on custom digital platforms, web applications, SEO performance, ecommerce development, and mobile app strategy.",
   },
+  contact: {
+    image:
+      "https://ik.imagekit.io/codebyjerry/techbuds/contact_page_banner_new.png",
+    eyebrow: "Contact Us",
+    title: "Let's start your next project with",
+    titleAccent: "clarity and confidence.",
+    description:
+      "Share your idea by form, email, phone, or WhatsApp — and we'll respond with a plan, timeline, and estimate tailored to your goals.",
+  },
 } satisfies Record<string, PageBannerContent>;

@@ -7,6 +7,9 @@ export type PortfolioProject = {
   tags: string[];
   previewImage: string;
   images: string[];
+  year: string;
+  month: string;
+  icon: string;
 };
 
 export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
@@ -23,6 +26,9 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
       "Optimized cart-to-checkout journey",
     ],
     tags: ["Next.js", "Mobile UX", "Q-Commerce", "Checkout", "Reviews"],
+    year: "'25",
+    month: "May",
+    icon: "shopping-bag",
     previewImage:
       "https://ik.imagekit.io/codebyjerry/techbuds/ChatGPT%20Image%20Jun%206,%202026,%2010_38_57%20PM.png",
     images: [
@@ -46,6 +52,9 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
       "Shop-ready ecommerce experience",
     ],
     tags: ["Ecommerce", "Healthcare", "UI/UX", "Product Pages", "Branding"],
+    year: "'25",
+    month: "April",
+    icon: "heart-pulse",
     previewImage:
       "https://ik.imagekit.io/codebyjerry/techbuds/ChatGPT%20Image%20Jun%206,%202026,%2010_38_59%20PM.png",
     images: [
@@ -69,6 +78,9 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
       "Guided capture flow for consistent field results",
     ],
     tags: ["Flutter", "AI Vision", "TFLite", "Mobile App", "Dairy Tech"],
+    year: "'25",
+    month: "June",
+    icon: "smartphone",
     previewImage:
       "https://ik.imagekit.io/codebyjerry/techbuds/ChatGPT%20Image%20Jun%206,%202026,%2010_39_02%20PM.png",
     images: [
@@ -92,6 +104,9 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
       "Clean B2B technology brand experience",
     ],
     tags: ["SDV", "Automotive", "Cybersecurity", "Training", "Web Platform"],
+    year: "'25",
+    month: "June",
+    icon: "car",
     previewImage:
       "https://ik.imagekit.io/codebyjerry/works/Destro%20Solutions/Screenshot%202026-06-06%20210322.png",
     images: [

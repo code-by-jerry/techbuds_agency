@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ContactModalTrigger from "@/components/ContactModalTrigger";
 import ProcessSection from "@/components/ProcessSection";
 import TestimonialSlider from "@/components/TestimonialSlider";
 import ContactModalCTA from "@/components/ContactModalCTA";
@@ -140,9 +141,12 @@ export default function Home() {
                 transitions for a bold digital studio first impression.
               </p>
               <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:mt-6 lg:justify-start">
-                <Link href="/contact" className="btn-primary">
+                <ContactModalTrigger
+                  source="Home Hero - Start your project"
+                  className="btn-primary"
+                >
                   Start your project
-                </Link>
+                </ContactModalTrigger>
                 <Link href="/portfolio" className="btn-secondary">
                   View portfolio
                 </Link>

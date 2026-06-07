@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ContactModalTrigger from "@/components/ContactModalTrigger";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, CalendarDays, Clock } from "lucide-react";
@@ -231,12 +232,12 @@ export default async function BlogDetail({ params }: BlogDetailProps) {
                 <h2 className="mt-2 text-lg font-bold text-primary">
                   Build a scalable digital product with TechBuds.
                 </h2>
-                <Link
-                  href="/contact"
+                <ContactModalTrigger
+                  source="Blog Sidebar - Start Project"
                   className="mt-4 inline-flex rounded-full bg-red-500 px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-red-600"
                 >
                   Start Project
-                </Link>
+                </ContactModalTrigger>
               </div>
             </aside>
           </div>

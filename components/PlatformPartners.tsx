@@ -14,10 +14,12 @@ export default function PlatformPartners() {
                 <img
                   src={partner.logo}
                   alt={`${partner.name} logo`}
-                  className={`w-auto object-contain transition-opacity duration-300 group-hover:opacity-100 ${
-                    partner.compact
-                      ? "max-h-9 sm:max-h-10"
-                      : "max-h-7 sm:max-h-8"
+                  className={`object-contain transition-opacity duration-300 group-hover:opacity-100 ${
+                    partner.iconOnly
+                      ? "h-14 w-14 sm:h-16 sm:w-16"
+                      : partner.compact
+                        ? "max-h-9 w-auto sm:max-h-10"
+                        : "max-h-7 w-auto sm:max-h-8"
                   }`}
                   loading="lazy"
                 />

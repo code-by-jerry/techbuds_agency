@@ -1,10 +1,10 @@
 import ContactModalCTA from "@/components/ContactModalCTA";
 import FAQSection from "@/components/FAQSection";
 import PageHeroBanner from "@/components/PageHeroBanner";
+import PortfolioHighlightsSection from "@/components/PortfolioHighlightsSection";
 import PortfolioShowcase from "@/components/PortfolioShowcase";
-import TestimonialSlider from "@/components/TestimonialSlider";
+import ServiceBlogPreview from "@/components/ServiceBlogPreview";
 import { PAGE_BANNERS } from "@/lib/page-banners";
-import { PORTFOLIO_PROJECTS } from "@/lib/portfolio";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -58,50 +58,29 @@ export default function Portfolio() {
     <div className="bg-brand">
       <PageHeroBanner {...PAGE_BANNERS.portfolio} />
 
-      <section className="relative overflow-hidden border-b border-custom bg-[#081124]">
-        <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[600px] -translate-x-1/2 rounded-full bg-accent-secondary/[0.06] blur-3xl" />
+      <PortfolioHighlightsSection />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-20">
-          <nav
-            aria-label="Portfolio projects"
-            className="mb-12 flex flex-wrap gap-2"
-          >
-            {PORTFOLIO_PROJECTS.map((project) => (
-              <a
-                key={project.slug}
-                href={`#${project.slug}`}
-                className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm font-medium text-secondary/85 transition-colors hover:border-accent-secondary/40 hover:bg-accent-secondary/10 hover:text-primary"
-              >
-                {project.name}
-              </a>
-            ))}
-          </nav>
+      <section className="border-b border-[#e2e8f0] bg-white">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-20">
+          <div className="mb-12 text-center">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-accent-secondary">
+              Selected Work
+            </p>
+            <h2 className="text-3xl font-bold text-[#1e293b] md:text-4xl">
+              Projects we&apos;ve{" "}
+              <span className="text-accent-secondary">shipped.</span>
+            </h2>
+            <div className="mx-auto mt-3 h-0.5 w-16 rounded-full bg-accent-secondary" />
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[#64748b] md:text-base">
+              Click a project to browse screenshots in the gallery.
+            </p>
+          </div>
 
           <PortfolioShowcase />
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-t border-custom bg-surface">
-        <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[600px] -translate-x-1/2 rounded-full bg-accent-secondary/[0.04] blur-3xl" />
-
-        <div className="relative mx-auto max-w-7xl px-6 py-20 md:px-12 md:py-28">
-          <div className="mb-14 text-center">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-accent-secondary">
-              Testimonials
-            </p>
-            <h2 className="text-3xl font-bold text-primary md:text-5xl">
-              What Our <span className="text-accent-secondary">Clients Say</span>
-            </h2>
-            <div className="mx-auto mt-3 h-0.5 w-16 rounded-full bg-accent-secondary" />
-            <p className="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-secondary md:text-lg">
-              Real feedback from the brands and businesses we&rsquo;ve had the
-              privilege to work with.
-            </p>
-          </div>
-
-          <TestimonialSlider />
-        </div>
-      </section>
+      <ServiceBlogPreview />
 
       <FAQSection title="Portfolio Questions" list={portfolioFaq} />
 

@@ -1,9 +1,10 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import { Menu, Phone, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useContactModal } from "@/components/ContactModalProvider";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -11,6 +12,7 @@ const navItems = [
   { href: "/services", label: "Services" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Contact" },
 ];
 
 function isActivePath(pathname: string, href: string) {
@@ -58,9 +60,12 @@ function navLinkClass(
 }
 
 function GetQuoteButton({ scrolled }: { scrolled: boolean }) {
+  const { openContactModal } = useContactModal();
+
   return (
-    <Link
-      href="/contact"
+    <button
+      type="button"
+      onClick={() => openContactModal("Navbar - Get Quote")}
       className={`quote-btn-attention relative inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-300 ${
         scrolled
           ? "border border-accent-secondary bg-accent-secondary !text-white hover:!text-white"
@@ -69,7 +74,7 @@ function GetQuoteButton({ scrolled }: { scrolled: boolean }) {
     >
       <Phone size={16} className="quote-btn-icon relative z-10" />
       <span className="relative z-10">Get Quote</span>
-    </Link>
+    </button>
   );
 }
 
@@ -77,6 +82,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const { openContactModal } = useContactModal();
 
   useEffect(() => {
     const onScroll = () => {
@@ -158,18 +164,21 @@ export default function Navbar() {
               {item.label}
             </Link>
           ))}
-          <Link
-            href="/contact"
-            className={`quote-btn-attention mt-2 flex items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-semibold transition-colors ${
+          <button
+            type="button"
+            className={`quote-btn-attention mt-2 flex w-full items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-semibold transition-colors ${
               scrolled
                 ? "border border-accent-secondary bg-accent-secondary !text-white"
                 : "border border-accent-secondary bg-accent-secondary/10 !text-secondary hover:bg-accent-secondary hover:!text-white"
             }`}
-            onClick={() => setMenuOpen(false)}
+            onClick={() => {
+              setMenuOpen(false);
+              openContactModal("Navbar Mobile - Get Quote");
+            }}
           >
             <Phone size={16} className="quote-btn-icon relative z-10" />
             <span className="relative z-10">Get Quote</span>
-          </Link>
+          </button>
         </div>
       </div>
     </nav>

@@ -2,6 +2,7 @@ export type PlatformPartner = {
   name: string;
   logo: string;
   compact?: boolean;
+  iconOnly?: boolean;
 };
 
 export const PLATFORM_PARTNERS: PlatformPartner[] = [
@@ -18,8 +19,9 @@ export const PLATFORM_PARTNERS: PlatformPartner[] = [
     logo: "https://ik.imagekit.io/codebyjerry/works/Partners/brandbird-Oracle%20Cloud-logotype.svg",
   },
   {
-    name: "WhatsApp",
-    logo: "https://ik.imagekit.io/codebyjerry/works/Partners/brandbird-Whatsapp-logotype.svg",
+    name: "Vercel",
+    logo: "https://ik.imagekit.io/codebyjerry/works/Partners/vercel-svgrepo-com.svg",
+    iconOnly: true,
   },
   {
     name: "Meta",
@@ -85,7 +87,7 @@ export const PLATFORM_PARTNERS: PlatformPartner[] = [
 export const PARTNER_CATEGORIES = [
   {
     title: "Cloud & Infrastructure",
-    items: ["AWS", "Google Cloud", "Oracle Cloud", "Firebase", "Cloudflare", "NGINX"],
+    items: ["AWS", "Google Cloud", "Oracle Cloud", "Firebase", "Cloudflare", "Vercel", "NGINX"],
   },
   {
     title: "Payments & Commerce",
@@ -97,6 +99,6 @@ export const PARTNER_CATEGORIES = [
   },
   {
     title: "Communication & Growth",
-    items: ["Meta", "WhatsApp", "WhatsApp Business", "Twilio"],
+    items: ["Meta", "WhatsApp Business", "Twilio"],
   },
 ];
