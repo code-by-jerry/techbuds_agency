@@ -1,7 +1,8 @@
 import Link from "next/link";
 import ContactModalTrigger from "@/components/ContactModalTrigger";
 import ProcessSection from "@/components/ProcessSection";
-import TestimonialSlider from "@/components/TestimonialSlider";
+import ServiceBlogPreview from "@/components/ServiceBlogPreview";
+import SuccessStoriesSlider from "@/components/SuccessStoriesSlider";
 import ContactModalCTA from "@/components/ContactModalCTA";
 import FAQSection from "@/components/FAQSection";
 import HeroContactForm from "@/components/HeroContactForm";
@@ -233,29 +234,26 @@ export default function Home() {
       {/* PROCESS SECTION — interactive left/right layout */}
       <ProcessSection />
 
-      {/* TESTIMONIALS SECTION — horizontal slider */}
-      <section className="relative overflow-hidden border-t border-custom bg-surface">
-        {/* subtle red glow */}
-        <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[600px] -translate-x-1/2 rounded-full bg-red-500/[0.04] blur-3xl" />
+      <ServiceBlogPreview />
 
-        <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-20 md:py-28">
-          {/* header */}
-          <div className="text-center mb-14">
+      <section className="relative overflow-hidden border-t border-[#e2e8f0] bg-[#f8fafc]">
+        <div className="relative mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-24">
+          <div className="mb-12 text-center md:mb-14">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-accent-secondary">
-              Testimonials
+              Case Studies
             </p>
-            <h2 className="text-3xl font-bold text-primary md:text-5xl">
-              What Our <span className="text-accent-secondary">Clients Say</span>
+            <h2 className="text-3xl font-bold text-[#1e293b] md:text-5xl">
+              Business{" "}
+              <span className="text-accent-secondary">Success Stories</span>
             </h2>
             <div className="mx-auto mt-3 h-0.5 w-16 rounded-full bg-accent-secondary" />
-            <p className="mx-auto mt-5 max-w-3xl text-secondary text-base md:text-lg leading-relaxed">
-              Real feedback from the brands and businesses we&rsquo;ve had the
-              privilege to work with.
+            <p className="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-[#64748b] md:text-lg">
+              Real projects, real challenges, and real digital solutions
+              delivered for growing businesses.
             </p>
           </div>
 
-          {/* testimonial slider — 3 at a time desktop, 1 mobile */}
-          <TestimonialSlider />
+          <SuccessStoriesSlider />
         </div>
       </section>
 

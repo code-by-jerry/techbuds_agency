@@ -94,7 +94,7 @@ export default async function BlogDetail({ params }: BlogDetailProps) {
   };
 
   return (
-    <div className="bg-brand">
+    <div className="bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -111,6 +111,7 @@ export default async function BlogDetail({ params }: BlogDetailProps) {
               backgroundPosition: "center",
               backgroundRepeat: "repeat",
             }}
+            aria-hidden
           />
           <div className="pointer-events-none absolute inset-0 bg-[#081124]/48" />
           <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[700px] -translate-x-1/2 rounded-full bg-red-500/[0.05] blur-3xl" />
@@ -118,14 +119,14 @@ export default async function BlogDetail({ params }: BlogDetailProps) {
           <div className="relative mx-auto max-w-5xl px-6 py-12 md:px-12 md:py-20">
             <Link
               href="/blog"
-              className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-secondary transition-colors hover:text-red-400"
+              className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-secondary transition-colors hover:text-accent-secondary"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to Blog
             </Link>
 
             <div className="mb-5 flex flex-wrap items-center gap-3 text-xs text-secondary/70">
-              <span className="rounded-full border border-red-400/30 bg-red-500/10 px-3 py-1 font-semibold uppercase tracking-[0.18em] text-red-400">
+              <span className="rounded-full border border-accent-secondary/30 bg-accent-secondary/10 px-3 py-1 font-semibold uppercase tracking-[0.18em] text-accent-secondary">
                 {post.category}
               </span>
               <span className="inline-flex items-center gap-1.5">
@@ -142,38 +143,28 @@ export default async function BlogDetail({ params }: BlogDetailProps) {
               </span>
             </div>
 
-            <h1 className="text-4xl font-bold leading-tight text-primary md:text-6xl">
+            <h1 className="text-3xl font-bold leading-tight text-accent-secondary md:text-5xl lg:text-6xl">
               {post.title}
             </h1>
-            <p className="mt-6 text-base leading-8 text-secondary md:text-lg">
+            <p className="mt-6 max-w-3xl text-base leading-relaxed text-secondary/85 md:text-lg">
               {post.brief}
             </p>
           </div>
         </section>
 
-        <section className="border-b border-custom bg-surface/40">
-          <div className="mx-auto max-w-5xl px-6 py-10 md:px-12 md:py-14">
-            <img
-              src={post.image}
-              alt={post.title}
-              className="h-auto w-full rounded-xl border border-white/10 object-cover"
-            />
-          </div>
-        </section>
-
-        <section className="bg-[#081124]">
-          <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:px-12 md:py-20 lg:grid-cols-[minmax(0,1fr)_320px]">
+        <section className="bg-white">
+          <div className="mx-auto grid max-w-7xl gap-10 px-6 py-12 md:px-12 md:py-16 lg:grid-cols-[minmax(0,1fr)_300px]">
             <div className="max-w-4xl">
               {post.sections.map((section) => (
-                <section key={section.heading} className="mb-12 last:mb-0">
-                  <h2 className="text-2xl font-bold text-primary md:text-3xl">
+                <section key={section.heading} className="mb-10 last:mb-0">
+                  <h2 className="text-xl font-bold text-[#1e293b] md:text-2xl">
                     {section.heading}
                   </h2>
-                  <div className="mt-5 space-y-5">
+                  <div className="mt-4 space-y-4">
                     {section.body.map((paragraph) => (
                       <p
                         key={paragraph}
-                        className="text-base leading-8 text-secondary/85"
+                        className="text-base leading-relaxed text-[#64748b]"
                       >
                         {paragraph}
                       </p>
@@ -183,25 +174,25 @@ export default async function BlogDetail({ params }: BlogDetailProps) {
               ))}
             </div>
 
-            <aside className="space-y-6 lg:sticky lg:top-28 lg:h-fit">
-              <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
-                <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-primary">
+            <aside className="space-y-5 lg:sticky lg:top-28 lg:h-fit">
+              <div className="rounded-2xl border border-white/10 bg-[#081124] p-5">
+                <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
                   Other Blogs
                 </h2>
-                <div className="mt-5 space-y-4">
+                <div className="mt-4 space-y-3">
                   {relatedPosts.map((item) => (
                     <Link
                       key={item.slug}
                       href={`/blog/${item.slug}`}
-                      className="group block rounded-lg border border-white/10 bg-[#0b1226] p-4 transition-all duration-300 hover:border-red-400/30 hover:bg-white/[0.05]"
+                      className="group block rounded-xl border border-white/10 bg-white/[0.03] p-4 transition-all duration-300 hover:border-accent-secondary/30 hover:bg-white/[0.06]"
                     >
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-red-400">
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-accent-secondary">
                         {item.category}
                       </p>
-                      <h3 className="mt-2 text-sm font-bold leading-6 text-primary transition-colors group-hover:text-red-400">
+                      <h3 className="mt-1.5 text-sm font-bold leading-snug text-primary transition-colors group-hover:text-accent-secondary">
                         {item.title}
                       </h3>
-                      <p className="mt-2 line-clamp-2 text-xs leading-5 text-secondary/70">
+                      <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-secondary/75">
                         {item.brief}
                       </p>
                     </Link>
@@ -209,15 +200,15 @@ export default async function BlogDetail({ params }: BlogDetailProps) {
                 </div>
               </div>
 
-              <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
-                <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-primary">
+              <div className="rounded-2xl border border-white/10 bg-[#081124] p-5">
+                <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
                   SEO Focus
                 </h2>
-                <div className="mt-4 flex flex-wrap gap-2">
+                <div className="mt-3 flex flex-wrap gap-2">
                   {post.seoKeywords.map((keyword) => (
                     <span
                       key={keyword}
-                      className="rounded-md border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-secondary/80"
+                      className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-secondary/80"
                     >
                       {keyword}
                     </span>
@@ -225,16 +216,16 @@ export default async function BlogDetail({ params }: BlogDetailProps) {
                 </div>
               </div>
 
-              <div className="rounded-xl border border-red-400/20 bg-red-500/[0.06] p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-red-400">
+              <div className="rounded-2xl border border-accent-secondary/25 bg-accent-secondary/10 p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-secondary">
                   Need a Platform?
                 </p>
-                <h2 className="mt-2 text-lg font-bold text-primary">
+                <h2 className="mt-2 text-base font-bold text-primary">
                   Build a scalable digital product with TechBuds.
                 </h2>
                 <ContactModalTrigger
                   source="Blog Sidebar - Start Project"
-                  className="mt-4 inline-flex rounded-full bg-red-500 px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-red-600"
+                  className="mt-4 inline-flex rounded-full bg-accent-secondary px-4 py-2 text-sm font-bold text-white transition-opacity hover:opacity-90"
                 >
                   Start Project
                 </ContactModalTrigger>
@@ -244,17 +235,17 @@ export default async function BlogDetail({ params }: BlogDetailProps) {
         </section>
       </article>
 
-      <section className="border-t border-custom bg-surface">
-        <div className="mx-auto max-w-5xl px-6 py-12 text-center md:px-12 md:py-16">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-red-400">
+      <section className="border-t border-[#e2e8f0] bg-[#f8fafc]">
+        <div className="mx-auto max-w-5xl px-6 py-12 text-center md:px-12 md:py-14">
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-accent-secondary">
             Keep Reading
           </p>
-          <h2 className="mt-3 text-3xl font-bold text-primary md:text-4xl">
+          <h2 className="mt-3 text-2xl font-bold text-[#1e293b] md:text-3xl">
             Explore More Digital Growth Insights
           </h2>
           <Link
             href="/blog"
-            className="mt-6 inline-flex rounded-full border border-white/20 bg-white/[0.04] px-6 py-3 text-sm font-bold text-primary transition-all duration-300 hover:border-red-400/40 hover:bg-red-500/10 hover:text-red-400"
+            className="mt-5 inline-flex rounded-full border border-[#f5202d] px-6 py-2.5 text-sm font-semibold text-accent-secondary transition-colors hover:bg-accent-secondary hover:text-white"
           >
             View All Blogs
           </Link>

@@ -57,7 +57,7 @@ export default function Blog() {
   };
 
   return (
-    <div className="bg-brand">
+    <div className="bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -65,29 +65,29 @@ export default function Blog() {
 
       <PageHeroBanner {...PAGE_BANNERS.blog} />
 
-      <section className="border-b border-custom bg-surface/40">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-20">
-          <div className="grid gap-6">
+      <section className="border-b border-[#e2e8f0] bg-[#f8fafc]">
+        <div className="mx-auto max-w-7xl px-6 py-14 md:px-12 md:py-16">
+          <div className="grid gap-5">
             {blogPosts.map((post) => (
               <article
                 key={post.slug}
-                className="grid overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] transition-all duration-300 hover:border-red-400/30 hover:bg-white/[0.05] md:grid-cols-[340px_1fr]"
+                className="grid overflow-hidden rounded-2xl border border-[#e2e8f0] bg-white transition-all duration-300 hover:border-accent-secondary/30 hover:shadow-[0_12px_40px_rgba(15,23,42,0.08)] md:grid-cols-[minmax(0,2fr)_3fr]"
               >
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="block overflow-hidden bg-[#0b1226]"
+                  className="relative block min-h-[220px] overflow-hidden md:h-full md:min-h-[260px]"
                   aria-label={post.title}
                 >
                   <img
                     src={post.image}
                     alt={post.title}
-                    className="h-64 w-full object-cover transition-transform duration-500 hover:scale-105 md:h-full"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
                 </Link>
 
-                <div className="flex flex-col justify-center p-6 md:p-8">
-                  <div className="mb-4 flex flex-wrap items-center gap-3 text-xs text-secondary/70">
-                    <span className="rounded-full border border-red-400/30 bg-red-500/10 px-3 py-1 font-semibold uppercase tracking-[0.18em] text-red-400">
+                <div className="flex flex-col justify-center p-6 md:p-7">
+                  <div className="mb-3 flex flex-wrap items-center gap-3 text-xs text-[#94a3b8]">
+                    <span className="rounded-full bg-accent-secondary/10 px-3 py-1 font-semibold uppercase tracking-[0.16em] text-accent-secondary">
                       {post.category}
                     </span>
                     <span className="inline-flex items-center gap-1.5">
@@ -104,24 +104,24 @@ export default function Blog() {
                     </span>
                   </div>
 
-                  <h2 className="text-2xl font-bold leading-tight text-primary md:text-3xl">
+                  <h2 className="text-xl font-bold leading-tight md:text-2xl">
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="text-primary transition-colors hover:text-red-400"
+                      className="text-[#1a1f2e] transition-colors duration-300 hover:text-accent-secondary"
                     >
                       {post.title}
                     </Link>
                   </h2>
 
-                  <p className="mt-4 max-w-3xl text-sm leading-7 text-secondary/80 md:text-base">
+                  <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#64748b] md:text-base">
                     {post.brief}
                   </p>
 
-                  <div className="mt-5 flex flex-wrap gap-2">
+                  <div className="mt-4 flex flex-wrap gap-2">
                     {post.seoKeywords.slice(0, 3).map((keyword) => (
                       <span
                         key={keyword}
-                        className="rounded-md border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-secondary/70"
+                        className="rounded-full bg-[#f8fafc] px-3 py-1 text-xs text-[#64748b] ring-1 ring-[#e2e8f0]"
                       >
                         {keyword}
                       </span>
@@ -130,7 +130,7 @@ export default function Blog() {
 
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="mt-6 inline-flex w-fit items-center gap-2 text-sm font-bold text-red-400 transition-colors hover:text-red-300"
+                    className="mt-5 inline-flex w-fit items-center gap-2 text-sm font-semibold text-accent-secondary transition-colors hover:text-[#1e293b]"
                   >
                     Read Article
                     <ArrowRight className="h-4 w-4" />

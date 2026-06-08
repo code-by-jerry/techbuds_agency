@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import ServiceCard from "@/components/ServiceCard";
 import { SERVICES } from "@/lib/services";
 
@@ -34,34 +36,26 @@ export default function ServicesSection() {
       }`}
     >
       <div className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-accent-secondary/[0.06] blur-3xl" />
-      <div className="pointer-events-none absolute -left-24 bottom-0 h-64 w-64 rounded-full bg-[#1e293b]/[0.04] blur-3xl" />
 
-      <div className="relative mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-24">
+      <div className="relative mx-auto max-w-7xl px-6 py-12 md:px-12 md:py-16">
         <div
-          className="service-card-enter mb-12 grid gap-8 lg:mb-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-end"
+          className="service-card-enter mb-8 text-center md:mb-10"
           style={{ animationDelay: "0ms" }}
         >
-          <div>
-            <div className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-accent-secondary/25 bg-accent-secondary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent-secondary">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent-secondary" />
-              What We Offer
-            </div>
-
-            <h2 className="text-3xl font-bold leading-tight text-[#1e293b] md:text-4xl lg:text-5xl">
-              Our <span className="text-accent-secondary">Services</span>
-            </h2>
-
-            <div className="mt-4 h-1 w-20 rounded-full bg-accent-secondary" />
-          </div>
-
-          <p className="max-w-xl text-base leading-relaxed text-[#475569] md:text-lg lg:pb-1">
-            End-to-end digital solutions — from brand identity and custom
-            platforms to mobile apps, SEO, and ecommerce — built to help your
-            business grow with clarity and confidence.
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-accent-secondary">
+            What We Offer
+          </p>
+          <h2 className="text-2xl font-bold text-[#1e293b] md:text-4xl">
+            Our <span className="text-accent-secondary">Services</span>
+          </h2>
+          <div className="mx-auto mt-2 h-0.5 w-12 rounded-full bg-accent-secondary" />
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-[#64748b] md:text-base">
+            Brand, web, mobile, platforms, SEO, and ecommerce — built to help
+            your business grow with clarity and confidence.
           </p>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3 xl:gap-8">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
           {SERVICES.map((service, index) => (
             <ServiceCard
               key={service.slug}
@@ -69,8 +63,19 @@ export default function ServicesSection() {
               theme="light"
               index={index}
               animated
+              compact
             />
           ))}
+        </div>
+
+        <div className="mt-8 text-center">
+          <Link
+            href="/services"
+            className="inline-flex items-center gap-2 rounded-full border border-[#f5202d] px-5 py-2.5 text-sm font-semibold text-accent-secondary transition-colors hover:bg-accent-secondary hover:text-white"
+          >
+            Explore all services
+            <ArrowRight size={14} />
+          </Link>
         </div>
       </div>
     </section>

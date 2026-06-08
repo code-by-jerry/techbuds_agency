@@ -29,27 +29,24 @@ export default function ServiceBlogPreview() {
 
         <div className="grid gap-5 md:grid-cols-3">
           {posts.map((post) => (
-            <article
-              key={post.slug}
-              className="group overflow-hidden rounded-2xl border border-[#e2e8f0] bg-white transition-all duration-300 hover:border-accent-secondary/30 hover:shadow-[0_12px_40px_rgba(15,23,42,0.08)]"
-            >
-              <Link href={`/blog/${post.slug}`} className="block overflow-hidden">
+            <article key={post.slug} className="group">
+              <Link href={`/blog/${post.slug}`} className="block">
                 <img
                   src={post.image}
                   alt={post.title}
-                  className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="h-auto w-full"
                 />
               </Link>
-              <div className="p-5">
+              <div className="pt-4">
                 <span className="inline-block rounded-full bg-accent-secondary/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-accent-secondary">
                   {post.category}
                 </span>
                 <Link href={`/blog/${post.slug}`}>
-                  <h3 className="mt-3 text-base font-bold leading-snug text-[#1e293b] transition-colors group-hover:text-accent-secondary">
+                  <h3 className="mt-3 text-base font-bold leading-snug text-[#1a1f2e] transition-colors duration-300 hover:text-accent-secondary">
                     {post.title}
                   </h3>
                 </Link>
-                <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-[#64748b]">
+                <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-[#64748b]">
                   {post.brief}
                 </p>
                 <div className="mt-4 flex items-center gap-4 text-xs text-[#94a3b8]">

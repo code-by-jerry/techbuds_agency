@@ -1,73 +1,67 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { Quote, Star } from "lucide-react";
-import { TESTIMONIALS } from "@/lib/testimonials";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { SUCCESS_STORIES } from "@/lib/success-stories";
 
-const TOTAL = TESTIMONIALS.length;
-const AUTO_INTERVAL = 5000;
+const TOTAL = SUCCESS_STORIES.length;
+const AUTO_INTERVAL = 5500;
 const VISIBLE_DESKTOP = 3;
 const VISIBLE_MOBILE = 1;
 
-const duplicated = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
+const duplicated = [
+  ...SUCCESS_STORIES,
+  ...SUCCESS_STORIES,
+  ...SUCCESS_STORIES,
+];
 
-function StarRating({ rating }: { rating: 4 | 5 }) {
-  return (
-    <div className="flex items-center gap-0.5" aria-label={`${rating} out of 5 stars`}>
-      {Array.from({ length: 5 }).map((_, index) => (
-        <Star
-          key={index}
-          size={14}
-          className={
-            index < rating
-              ? "fill-amber-400 text-amber-400"
-              : "fill-[#e2e8f0] text-[#e2e8f0]"
-          }
-        />
-      ))}
-    </div>
-  );
-}
-
-function TestimonialCard({
-  testimonial,
+function SuccessStoryCard({
+  story,
 }: {
-  testimonial: (typeof TESTIMONIALS)[number];
+  story: (typeof SUCCESS_STORIES)[number];
 }) {
   return (
-    <div className="testimonial-card flex h-full w-full flex-col p-6 md:p-8">
-      <Quote
-        size={24}
-        className="mb-4 text-accent-secondary"
-        aria-hidden
-      />
-      <p className="flex-1 text-sm leading-relaxed text-[#64748b] md:text-base">
-        &ldquo;{testimonial.message}&rdquo;
+    <div className="success-story-card flex h-full w-full flex-col p-5 md:p-6">
+      <span className="inline-flex w-fit rounded-full bg-accent-secondary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-accent-secondary">
+        {story.category}
+      </span>
+
+      <h3 className="mt-3 text-lg font-bold text-[#1e293b] md:text-xl">
+        {story.project}
+      </h3>
+
+      <p className="mt-3 flex-1 text-sm leading-relaxed text-[#64748b]">
+        {story.summary}
       </p>
 
-      <div className="mt-6 space-y-4 border-t border-[#f5202d]/20 pt-5">
-        <StarRating rating={testimonial.rating} />
-        <div className="flex items-center gap-3">
-          <img
-            src={testimonial.avatar}
-            alt={testimonial.name}
-            className="h-12 w-12 shrink-0 rounded-full bg-[#f1f5f9] object-cover ring-2 ring-[#f5202d]/25"
-          />
-          <div>
-            <p className="text-sm font-bold text-[#1e293b] md:text-base">
-              {testimonial.name}
-            </p>
-            <p className="text-xs text-[#94a3b8] md:text-sm">
-              {testimonial.role}, {testimonial.company}
-            </p>
-          </div>
-        </div>
+      <p className="mt-4 text-sm font-semibold leading-snug text-[#1e293b]">
+        {story.outcome}
+      </p>
+
+      <div className="mt-4 flex flex-wrap gap-2">
+        {story.tags.map((tag) => (
+          <span
+            key={tag}
+            className="rounded-full bg-[#f8fafc] px-2.5 py-1 text-[10px] font-medium text-[#64748b]"
+          >
+            {tag}
+          </span>
+        ))}
       </div>
+
+      <Link
+        href={`/portfolio#${story.slug}`}
+        className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-secondary transition-colors hover:text-[#1e293b]"
+      >
+        View case study
+        <ArrowRight size={14} />
+      </Link>
     </div>
   );
 }
 
-export default function TestimonialSlider() {
+export default function SuccessStoriesSlider() {
   const [current, setCurrent] = useState(TOTAL);
   const [transition, setTransition] = useState(true);
   const [visibleCount, setVisibleCount] = useState(VISIBLE_DESKTOP);
@@ -146,13 +140,13 @@ export default function TestimonialSlider() {
               : "none",
           }}
         >
-          {duplicated.map((testimonial, i) => (
+          {duplicated.map((story, i) => (
             <div
-              key={`${testimonial.id}-${i}`}
+              key={`${story.id}-${i}`}
               className="shrink-0 px-2 md:px-4"
               style={{ width: `${slideWidthPercent}%` }}
             >
-              <TestimonialCard testimonial={testimonial} />
+              <SuccessStoryCard story={story} />
             </div>
           ))}
         </div>
@@ -162,7 +156,7 @@ export default function TestimonialSlider() {
         type="button"
         onClick={goPrev}
         className="absolute left-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#f5202d] bg-white text-[#64748b] transition-all hover:bg-[#f5202d] hover:text-white md:-left-5"
-        aria-label="Previous testimonial"
+        aria-label="Previous success story"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -184,7 +178,7 @@ export default function TestimonialSlider() {
         type="button"
         onClick={goNext}
         className="absolute right-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#f5202d] bg-white text-[#64748b] transition-all hover:bg-[#f5202d] hover:text-white md:-right-5"
-        aria-label="Next testimonial"
+        aria-label="Next success story"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -203,7 +197,7 @@ export default function TestimonialSlider() {
       </button>
 
       <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-        {TESTIMONIALS.map((_, i) => {
+        {SUCCESS_STORIES.map((_, i) => {
           const isActive = i === realIndex;
           return (
             <button
@@ -218,7 +212,7 @@ export default function TestimonialSlider() {
                   ? "h-2 w-7 bg-accent-secondary"
                   : "h-2 w-2 bg-[#cbd5e1] hover:bg-[#94a3b8]"
               }`}
-              aria-label={`Go to testimonial ${i + 1}`}
+              aria-label={`Go to success story ${i + 1}`}
             />
           );
         })}
