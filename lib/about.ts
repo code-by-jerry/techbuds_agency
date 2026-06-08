@@ -85,10 +85,10 @@ export const ABOUT_VISION_BLOCK = {
 };
 
 export const ABOUT_HIGHLIGHT_STATS = [
-  { value: "50+", label: "Projects Delivered", icon: "rocket" as const },
+  { value: "20+", label: "Projects Contributed", icon: "rocket" as const },
   { value: "98%", label: "Client Satisfaction", icon: "thumbs-up" as const },
   { value: "10+", label: "Industry Verticals", icon: "lightbulb" as const },
-  { value: "5+", label: "Years Experience", icon: "users" as const },
+  { value: "5+", label: "Years Industry Experience", icon: "users" as const },
 ];
 
 export const ABOUT_PAGE_CONTENT: AboutSectionContent = {

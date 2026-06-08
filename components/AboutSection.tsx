@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { ArrowRight, Lightbulb, Target, Users } from "lucide-react";
+import { Lightbulb, Target, Users } from "lucide-react";
 import {
+  ABOUT_HIGHLIGHT_STATS,
   ABOUT_HOME_CONTENT,
   ABOUT_PAGE_CONTENT,
   type AboutSectionContent,
@@ -59,7 +60,6 @@ type AboutSectionProps = {
   theme?: AboutTheme;
   variant?: "home" | "page";
   id?: string;
-  showLink?: boolean;
 };
 
 const ABOUT_VARIANTS: Record<"home" | "page", AboutSectionContent> = {
@@ -80,7 +80,6 @@ export default function AboutSection({
   theme = "light",
   variant = "home",
   id,
-  showLink = false,
 }: AboutSectionProps) {
   const baseStyles = themeStyles[theme];
   const overrides = variant === "page" ? variantOverrides.page : undefined;
@@ -123,49 +122,72 @@ export default function AboutSection({
               </p>
             ))}
 
-            <div
-              className={`mt-8 grid w-full grid-cols-3 border-t pt-8 ${styles.divider}`}
-            >
-              {ABOUT_EXPERTISE_BADGES.map((badge) => {
-                const Icon = expertiseIcons[badge.icon];
-
-                return (
-                  <div
-                    key={badge.label}
-                    className="flex flex-col items-center gap-1.5 text-center sm:flex-row sm:justify-center sm:gap-2.5 sm:text-left"
-                  >
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent-secondary/10 text-accent-secondary">
-                      <Icon size={16} strokeWidth={2} aria-hidden />
-                    </span>
-                    <span
-                      className={`text-xs font-semibold md:text-sm ${
-                        theme === "light" ? "text-[#334155]" : "text-primary"
-                      }`}
-                    >
-                      {badge.label}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-
-            {showLink ? (
-              <Link
-                href="/about"
-                className={`mt-8 inline-flex w-fit items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold transition-colors ${styles.cta}`}
+            {variant === "home" ? (
+              <div
+                className={`mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t pt-8 sm:gap-x-10 ${styles.divider}`}
               >
-                Learn more about us
-                <ArrowRight size={16} />
-              </Link>
-            ) : null}
+                {ABOUT_HIGHLIGHT_STATS.map((stat) => (
+                  <div key={stat.label}>
+                    <p
+                      className={`text-2xl font-bold md:text-3xl ${styles.accent}`}
+                    >
+                      {stat.value}
+                    </p>
+                    <p className={`mt-1 text-sm ${styles.muted}`}>
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div
+                className={`mt-8 grid w-full grid-cols-3 border-t pt-8 ${styles.divider}`}
+              >
+                {ABOUT_EXPERTISE_BADGES.map((badge) => {
+                  const Icon = expertiseIcons[badge.icon];
+
+                  return (
+                    <div
+                      key={badge.label}
+                      className="flex flex-col items-center gap-1.5 text-center sm:flex-row sm:justify-center sm:gap-2.5 sm:text-left"
+                    >
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent-secondary/10 text-accent-secondary">
+                        <Icon size={16} strokeWidth={2} aria-hidden />
+                      </span>
+                      <span
+                        className={`text-xs font-semibold md:text-sm ${
+                          theme === "light" ? "text-[#334155]" : "text-primary"
+                        }`}
+                      >
+                        {badge.label}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           <div className="relative flex min-h-[280px] items-center justify-center">
-            <img
-              src={content.image}
-              alt={content.imageAlt}
-              className={imageClassName}
-            />
+            {variant === "home" ? (
+              <Link
+                href="/about"
+                className="group block w-full transition-transform duration-300 hover:scale-[1.01]"
+                aria-label="Learn more about TechBuds"
+              >
+                <img
+                  src={content.image}
+                  alt={content.imageAlt}
+                  className={`${imageClassName} transition-shadow duration-300 group-hover:shadow-md`}
+                />
+              </Link>
+            ) : (
+              <img
+                src={content.image}
+                alt={content.imageAlt}
+                className={imageClassName}
+              />
+            )}
           </div>
         </div>
       </div>

@@ -10,6 +10,7 @@ import ServicesSection from "@/components/ServicesSection";
 import FeaturedProjects from "@/components/FeaturedProjects";
 import PlatformPartners from "@/components/PlatformPartners";
 import AboutSection from "@/components/AboutSection";
+import BusinessSolutionsSection from "@/components/BusinessSolutionsSection";
 import type { Metadata } from "next";
 import { defaultSeo } from "@/lib/seo";
 
@@ -160,7 +161,7 @@ export default function Home() {
       </section>
 
       {/* TRUST BAR SECTION */}
-      <section className="border-y border-[#e2e8f0] bg-[#f8fafc]">
+      <section className="border-y border-[#e2e8f0] bg-white">
         <div className="mx-auto max-w-7xl px-6 py-5 md:px-10 md:py-6">
           <div className="mb-4 text-center md:mb-5">
             <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-[#64748b]">
@@ -190,7 +191,9 @@ export default function Home() {
         </div>
       </section>
 
-      <AboutSection theme="light" id="about" showLink />
+      <AboutSection theme="light" id="about" />
+
+      <BusinessSolutionsSection />
 
       {/* WHY US */}
       <section className="w-full border-y border-[#e2e8f0] bg-[#081124]">
