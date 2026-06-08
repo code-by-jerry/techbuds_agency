@@ -124,16 +124,18 @@ export default function AboutSection({
 
             {variant === "home" ? (
               <div
-                className={`mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t pt-8 sm:gap-x-10 ${styles.divider}`}
+                className={`mt-8 grid grid-cols-4 gap-3 border-t pt-8 md:gap-6 ${styles.divider}`}
               >
                 {ABOUT_HIGHLIGHT_STATS.map((stat) => (
-                  <div key={stat.label}>
+                  <div key={stat.label} className="min-w-0">
                     <p
-                      className={`text-2xl font-bold md:text-3xl ${styles.accent}`}
+                      className={`text-xl font-bold sm:text-2xl md:text-3xl ${styles.accent}`}
                     >
                       {stat.value}
                     </p>
-                    <p className={`mt-1 text-sm ${styles.muted}`}>
+                    <p
+                      className={`mt-1 text-[11px] leading-snug sm:text-xs ${styles.muted}`}
+                    >
                       {stat.label}
                     </p>
                   </div>
